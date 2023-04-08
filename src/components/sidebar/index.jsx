@@ -33,8 +33,12 @@ export default function Sidebar({ active }){
         <NavLink to={'/proprietario'} style={{textDecoration: 'none'}}>
             <SidebarItem Icon={BsFillPersonFill} Text="Proprietário" />
         </NavLink>
-        <SidebarItem Icon={BsScrewdriver} Text="Manutenção" />
-        <SidebarItem Icon={BsFillWalletFill} Text="Prestador de Serviço" />
+        <NavLink to={'/manutencao'} style={{textDecoration: 'none'}}>
+          <SidebarItem Icon={BsScrewdriver} Text="Manutenção" />
+        </NavLink>
+        <NavLink to={'/prestador'} style={{textDecoration: 'none'}}>
+          <SidebarItem Icon={BsFillWalletFill} Text="Prestador de Serviço" />
+        </NavLink>
         <NavLink to={'/ativos'} style={{textDecoration: 'none'}}>
             <SidebarItem Icon={BsClipboard2CheckFill} Text="Ativos" />
         </NavLink>

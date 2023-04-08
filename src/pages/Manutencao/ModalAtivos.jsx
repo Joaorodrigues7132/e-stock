@@ -13,12 +13,12 @@ export default function ModalAtivo({open, onChangeOpen}) {
                     </ModalHeader>
                     <ModalFields>
                         <Field>
-                            <p>Marca:</p>
+                            <p>Data_Envio:</p>
                             <Input />
                         </Field>
         
                         <Field>
-                            <p>Modelo:</p>
+                            <p>Valor:</p>
                             <Input />
                         </Field>
         
@@ -28,24 +28,20 @@ export default function ModalAtivo({open, onChangeOpen}) {
                         </Field>
         
                         <Field>
-                            <p>Estoque:</p>
-                            <Select />
+                            <p>Data_Solucao:</p>
+                            <Input />
                         </Field>
-        
+
                         <Field>
-                            <p>Proprietario:</p>
+                            <p>Prestador:</p>
                             <Select />
                         </Field>
 
                         <Field>
-                            <p>Posto:</p>
+                            <p>Ativo:</p>
                             <Select />
                         </Field>
-        
-                        <Field>
-                            <p>Classe:</p>
-                            <Select />
-                        </Field>
+
 
                         <Button spaced="15px" fill="rgba(33, 217, 82, 0.8)" size="100%" onClick={() =>onChangeOpen(!open)}>Salvar</Button>
                     </ModalFields>

@@ -13,12 +13,17 @@ export default function ModalAtivo({open, onChangeOpen}) {
                     </ModalHeader>
                     <ModalFields>
                         <Field>
-                            <p>Marca:</p>
+                            <p>Nome:</p>
                             <Input />
                         </Field>
         
                         <Field>
-                            <p>Modelo:</p>
+                            <p> Telefone:</p>
+                            <Input />
+                        </Field>
+        
+                        <Field>
+                            <p>Endereco:</p>
                             <Input />
                         </Field>
         
@@ -26,24 +31,9 @@ export default function ModalAtivo({open, onChangeOpen}) {
                             <p>Descricao:</p>
                             <Input />
                         </Field>
-        
-                        <Field>
-                            <p>Estoque:</p>
-                            <Select />
-                        </Field>
-        
-                        <Field>
-                            <p>Proprietario:</p>
-                            <Select />
-                        </Field>
 
                         <Field>
-                            <p>Posto:</p>
-                            <Select />
-                        </Field>
-        
-                        <Field>
-                            <p>Classe:</p>
+                            <p>Proprietario:</p>
                             <Select />
                         </Field>
 

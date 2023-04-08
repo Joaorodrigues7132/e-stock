@@ -20,7 +20,7 @@ export const Thead = styled.div`
 `
 
 export const TableItem = styled.div`
-    width: calc(100%/5);
+    width: calc(100%/6);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -39,7 +39,7 @@ export const TAction = styled.div`
     display: flex;
     justify-content: space-around;
     align-items: center;
-    width: calc(100%/5);
+    width: calc(100%/6);
     border: 1px solid black;
     padding: 10px;
 `

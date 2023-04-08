@@ -1,7 +1,8 @@
 import { useState } from "react";
 import ModalAtivo from "./ModalAtivos";
-import { ButtonAdd, ButtonDiv, Container, Table, TableItem, TAction, Tbody, TbSection, Thead } from "./styles";
+import { ButtonAction, ButtonAdd, ButtonDiv, Container, Table, TableItem, TAction, Tbody, TbSection, Thead, TitleTable } from "./styles";
 import { AiOutlinePlus } from 'react-icons/ai'
+import { BsFillTrashFill, BsFillPencilFill } from 'react-icons/bs'
 
 export default function Ativos() {
 
@@ -15,6 +16,7 @@ export default function Ativos() {
             Descricao: 'Carro esportivo',
             Proprietrio: 'Isaac',
             Modelo: '2022',
+            Posto: 18
         },
 
         {
@@ -24,6 +26,7 @@ export default function Ativos() {
             Descricao: 'Carro esportivo',
             Proprietrio: 'Isaac',
             Modelo: '2022',
+            Posto: 18
         },
 
         {
@@ -33,6 +36,7 @@ export default function Ativos() {
             Descricao: 'Carro esportivo',
             Proprietrio: 'Isaac',
             Modelo: '2022',
+            Posto: 18
         },
 
         {
@@ -42,13 +46,16 @@ export default function Ativos() {
             Descricao: 'Carro esportivo',
             Proprietrio: 'Isaac',
             Modelo: '2022',
+            Posto: 18
         }
     ]
 
     return(
         <Container>
+            <TitleTable>
+                <h1>Ativos</h1>
+            </TitleTable>
             <ButtonDiv>
-                <h1>Ativos: </h1>
                 <ButtonAdd onClick={() => setOpen(!open)}>Adicionar<AiOutlinePlus/></ButtonAdd>
             </ButtonDiv>
             <ModalAtivo open={open} onChangeOpen={() => setOpen(!open)} />
@@ -60,6 +67,7 @@ export default function Ativos() {
                     <TableItem>Descricao</TableItem>
                     <TableItem>Proprietario</TableItem>
                     <TableItem>Modelo</TableItem>
+                    <TableItem>Posto</TableItem>
                     <TableItem>Acoes: </TableItem>
                </Thead>
                <Tbody>
@@ -71,9 +79,14 @@ export default function Ativos() {
                             <TableItem>{item.Descricao}</TableItem>
                             <TableItem>{item.Proprietrio}</TableItem>
                             <TableItem>{item.Modelo}</TableItem>
+                            <TableItem>{item.Posto}</TableItem>
                             <TAction>
-                                <p>Deletar</p>
-                                <p>Editar</p>
+                                <ButtonAction>
+                                    <BsFillTrashFill />
+                                </ButtonAction>
+                                <ButtonAction>
+                                    <BsFillPencilFill />
+                                </ButtonAction>
                             </TAction>
                         </>
                    ))}
