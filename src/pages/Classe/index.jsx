@@ -4,32 +4,29 @@ import { ButtonAction, ButtonAdd, ButtonDiv, Container, Table, TableItem, TActio
 import { AiOutlinePlus } from 'react-icons/ai'
 import { BsFillTrashFill, BsFillPencilFill } from 'react-icons/bs'
 
-export default function Estoque() {
+export default function Classe() {
 
     const [open, setOpen] = useState(false)
 
     const Item = [
         {
-            Id: 'Mazeratti',
-            Nome: '10',
-            Endereco: 'Carro',
-            Descricao: 'Carro esportivo',
-            Telefone: 'Isaac',
+            id: 2,
+            Nome: 'nome2',
+            desc: 'desc2'
         },
 
         {
-            Id: 'Mazeratti',
-            Nome: '10',
-            Endereco: 'Carro',
-            Descricao: 'Carro esportivo',
-            Telefone: 'Isaac',
+            id: 2,
+            Nome: 'nome2',
+            desc: 'desc2'
         },
+
     ]
 
     return(
         <Container>
             <TitleTable>
-                <h1>Estoque</h1>
+                <h1>Classe</h1>
             </TitleTable>
             <ButtonDiv>
                 <ButtonAdd onClick={() => setOpen(!open)}>Adicionar<AiOutlinePlus/></ButtonAdd>
@@ -38,20 +35,16 @@ export default function Estoque() {
             <Table>
                <Thead>
                     <TableItem>Id</TableItem>
-                    <TableItem>Endereco</TableItem>
                     <TableItem>Nome</TableItem>
-                    <TableItem>Telefone</TableItem>
                     <TableItem>Descricao</TableItem>
-                    <TableItem>Acoes</TableItem>
+                    <TableItem>Acoes: </TableItem>
                </Thead>
                <Tbody>
                    {Item.map(item => (
                         <>
-                            <TableItem>{item.Id}</TableItem>
+                            <TableItem>{item.id}</TableItem>
                             <TableItem>{item.Nome}</TableItem>
-                            <TableItem>{item.Endereco}</TableItem>
-                            <TableItem>{item.Descricao}</TableItem>
-                            <TableItem>{item.Telefone}</TableItem>
+                            <TableItem>{item.desc}</TableItem>
                             <TAction>
                                 <ButtonAction>
                                     <BsFillTrashFill />

@@ -10,6 +10,8 @@ export const Table = styled.div`
     width: 100%;
     background-color: white;
     color: black;
+    border: 2px solid black;
+    border-radius: 10px;
 `
 
 export const Thead = styled.div`
@@ -20,7 +22,7 @@ export const Thead = styled.div`
 `
 
 export const TableItem = styled.div`
-    width: calc(100%/6);
+    width: calc(100%/4);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -39,7 +41,7 @@ export const TAction = styled.div`
     display: flex;
     justify-content: space-around;
     align-items: center;
-    width: calc(100%/6);
+    width: calc(100%/4);
     border: 1px solid black;
     padding: 10px;
 `
