@@ -1,24 +1,23 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { ButtonAction, ButtonAdd, ButtonDiv, Container, Table, TableItem, TAction, Tbody, TbSection, Thead, TitleTable } from "./styles";
 import { AiOutlinePlus } from 'react-icons/ai'
 import { BsFillTrashFill, BsFillPencilFill } from 'react-icons/bs'
 import axios from 'axios';
-import ModalEstoque from "./ModalEstoque";
-import ModalEstoqueUpdate from "./ModalEstoqueUpdate";
+import ModalPrestador from "./ModalPrestador";
+import ModalPrestadorUpdate from "./ModalPrestadorUpdate";
 
-
-export default function Estoque() {
+export default function Prestador() {
 
     const [open, setOpen] = useState(false)
     const [openEdit, setOpenEdit] = useState(false)
-    const [estoques, setEstoques] = useState([])
+    const [prestadores, setPrestadores] = useState([])
     const [idEdit, setIdEdit] = useState()
 
-    const deleteEstoque = async (id) => {
+    const deletePrestador = async (id) => {
         try {
             await axios({
                     method: "delete",
-                    url: `http://localhost:3001/estoque/${id}`,
+                    url: `http://localhost:3001/prestador/${id}`,
                     params: {
                        id: id
                     },
@@ -32,20 +31,20 @@ export default function Estoque() {
             }
     }
 
-    const openEditEstoque = (id) => {
+    const openEditPrestador = (id) => {
         setIdEdit(id)
         setOpenEdit(true)
     }
 
     useEffect(() => {
-        const getEstoque = async() => {
+        const getPrestador = async() => {
             try {
                 axios({
                     method: "get",
-                    url: "http://localhost:3001/estoque",
+                    url: "http://localhost:3001/prestador",
                     responseType: "json",
                   }).then(function (response) {
-                    setEstoques(response.data)
+                    setPrestadores(response.data)
                     console.log(response)
                   });
             } catch (error) {
@@ -53,42 +52,43 @@ export default function Estoque() {
             }
         }
 
-        getEstoque()
+        getPrestador()
     }, [])
+
 
     return(
         <Container>
             <TitleTable>
-                <h1>Estoque</h1>
+            <h1>Prestador</h1>
             </TitleTable>
             <ButtonDiv>
                 <ButtonAdd onClick={() => setOpen(!open)}>Adicionar<AiOutlinePlus/></ButtonAdd>
             </ButtonDiv>
-            <ModalEstoque open={open} onChangeOpen={() => setOpen(!open)} />
-            <ModalEstoqueUpdate  open={openEdit} onChangeOpen={() => setOpenEdit(!openEdit)} id={idEdit} />
+            <ModalPrestador open={open} onChangeOpen={() => setOpen(!open)} />
+            <ModalPrestadorUpdate open={openEdit} onChangeOpen={() => setOpenEdit(!openEdit)} id={idEdit} />
             <Table>
                <Thead>
-                    
-                    <TableItem>Endereço</TableItem>
                     <TableItem>Nome</TableItem>
                     <TableItem>Telefone</TableItem>
-                    <TableItem>Descrição</TableItem>
-                    <TableItem>Ações</TableItem>
+                    <TableItem>Endereco</TableItem>
+                    <TableItem>Descricao</TableItem>
+                    <TableItem>Proprietario:</TableItem>
+                    <TableItem>Acoes:</TableItem>
                </Thead>
                <Tbody>
-                   {estoques.map(item => (
+                   {prestadores.map(item => (
                         <>
-                            
-                            <TableItem>{item.Endereco}</TableItem>
                             <TableItem>{item.Nome}</TableItem>
                             <TableItem>{item.Telefone}</TableItem>
+                            <TableItem>{item.Endereco}</TableItem>
                             <TableItem>{item.Descricao}</TableItem>
+                            <TableItem>{item.propietario?.Nome}</TableItem>
                             <TAction>
-                                <ButtonAction onClick={() => deleteEstoque(item.id)}>
+                                <ButtonAction onClick={() => deletePrestador(item.id)}>
                                     <BsFillTrashFill />
                                 </ButtonAction>
                                 <ButtonAction>
-                                    <BsFillPencilFill onClick={() => openEditEstoque(item.id)}/>
+                                    <BsFillPencilFill onClick={() => openEditPrestador(item.id)}/>
                                 </ButtonAction>
                             </TAction>
                         </>

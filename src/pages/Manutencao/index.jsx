@@ -1,24 +1,24 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { ButtonAction, ButtonAdd, ButtonDiv, Container, Table, TableItem, TAction, Tbody, TbSection, Thead, TitleTable } from "./styles";
 import { AiOutlinePlus } from 'react-icons/ai'
 import { BsFillTrashFill, BsFillPencilFill } from 'react-icons/bs'
 import axios from 'axios';
-import ModalEstoque from "./ModalEstoque";
-import ModalEstoqueUpdate from "./ModalEstoqueUpdate";
+import ModalManutencao from "./ModalManutencao";
+import ModalManutencaoUpdate from "./ModalManutencaoUpdate";
 
-
-export default function Estoque() {
+export default function Manutencao() {
 
     const [open, setOpen] = useState(false)
     const [openEdit, setOpenEdit] = useState(false)
-    const [estoques, setEstoques] = useState([])
+    const [manutencoes, setManutencoes] = useState([])
     const [idEdit, setIdEdit] = useState()
 
-    const deleteEstoque = async (id) => {
+
+    const deleteManutencao = async (id) => {
         try {
             await axios({
                     method: "delete",
-                    url: `http://localhost:3001/estoque/${id}`,
+                    url: `http://localhost:3001/manutencao/${id}`,
                     params: {
                        id: id
                     },
@@ -32,20 +32,20 @@ export default function Estoque() {
             }
     }
 
-    const openEditEstoque = (id) => {
+    const openEditManutencao = (id) => {
         setIdEdit(id)
         setOpenEdit(true)
     }
 
     useEffect(() => {
-        const getEstoque = async() => {
+        const getManutencao = async() => {
             try {
                 axios({
                     method: "get",
-                    url: "http://localhost:3001/estoque",
+                    url: "http://localhost:3001/manutencao",
                     responseType: "json",
                   }).then(function (response) {
-                    setEstoques(response.data)
+                    setManutencoes(response.data)
                     console.log(response)
                   });
             } catch (error) {
@@ -53,42 +53,45 @@ export default function Estoque() {
             }
         }
 
-        getEstoque()
+        getManutencao()
     }, [])
+
 
     return(
         <Container>
             <TitleTable>
-                <h1>Estoque</h1>
+            <h1>Manutencao</h1>
             </TitleTable>
             <ButtonDiv>
                 <ButtonAdd onClick={() => setOpen(!open)}>Adicionar<AiOutlinePlus/></ButtonAdd>
             </ButtonDiv>
-            <ModalEstoque open={open} onChangeOpen={() => setOpen(!open)} />
-            <ModalEstoqueUpdate  open={openEdit} onChangeOpen={() => setOpenEdit(!openEdit)} id={idEdit} />
+            <ModalManutencao open={open} onChangeOpen={() => setOpen(!open)} />
+            <ModalManutencaoUpdate  open={openEdit} onChangeOpen={() => setOpenEdit(!openEdit)} id={idEdit} />
             <Table>
                <Thead>
-                    
-                    <TableItem>Endereço</TableItem>
-                    <TableItem>Nome</TableItem>
-                    <TableItem>Telefone</TableItem>
-                    <TableItem>Descrição</TableItem>
-                    <TableItem>Ações</TableItem>
+                    <TableItem>Data_Envio</TableItem>
+                    <TableItem>Valor</TableItem>
+                    <TableItem>Descricao</TableItem>
+                    <TableItem>Data_solucao</TableItem>
+                    <TableItem>Prestador:</TableItem>
+                    <TableItem>Ativo:</TableItem>
+                    <TableItem>Acoes:</TableItem>
                </Thead>
                <Tbody>
-                   {estoques.map(item => (
+                   {manutencoes.map(item => (
                         <>
-                            
-                            <TableItem>{item.Endereco}</TableItem>
-                            <TableItem>{item.Nome}</TableItem>
-                            <TableItem>{item.Telefone}</TableItem>
+                            <TableItem>{item.DataEnvio}</TableItem>
+                            <TableItem>{item.Valor}</TableItem>
                             <TableItem>{item.Descricao}</TableItem>
+                            <TableItem>{item.DataSolucao}</TableItem>
+                            <TableItem>{item.prestador?.Nome}</TableItem>
+                            <TableItem>{item.ativo?.Descricao}</TableItem>
                             <TAction>
-                                <ButtonAction onClick={() => deleteEstoque(item.id)}>
+                                <ButtonAction onClick={() => deleteManutencao(item.id)}>
                                     <BsFillTrashFill />
                                 </ButtonAction>
                                 <ButtonAction>
-                                    <BsFillPencilFill onClick={() => openEditEstoque(item.id)}/>
+                                    <BsFillPencilFill onClick={() => openEditManutencao(item.id)}/>
                                 </ButtonAction>
                             </TAction>
                         </>

@@ -13,6 +13,8 @@ import {
     BsFillFileEarmarkSpreadsheetFill
 } from 'react-icons/bs'
 
+import {AiOutlineCloudServer} from 'react-icons/ai'
+
 import SidebarItem from '../sidebarItem'
 import { NavLink } from 'react-router-dom'
 
@@ -33,12 +35,18 @@ export default function Sidebar({ active }){
         <NavLink to={'/proprietario'} style={{textDecoration: 'none'}}>
             <SidebarItem Icon={BsFillPersonFill} Text="Proprietário" />
         </NavLink>
-        <SidebarItem Icon={BsScrewdriver} Text="Manutenção" />
-        <SidebarItem Icon={BsFillWalletFill} Text="Prestador de Serviço" />
+        <NavLink to={'/manutencao'} style={{textDecoration: 'none'}}>
+          <SidebarItem Icon={BsScrewdriver} Text="Manutenção" />
+        </NavLink>
+        <NavLink to={'/prestador'} style={{textDecoration: 'none'}}>
+          <SidebarItem Icon={BsFillWalletFill} Text="Prestador de Serviço" />
+        </NavLink>
         <NavLink to={'/ativos'} style={{textDecoration: 'none'}}>
             <SidebarItem Icon={BsClipboard2CheckFill} Text="Ativos" />
         </NavLink>
-        <SidebarItem Icon={BsFillFileEarmarkSpreadsheetFill} Text="Classes" />
+        <NavLink to={'/classe'} style={{textDecoration: 'none'}}>
+            <SidebarItem Icon={AiOutlineCloudServer} Text="Classe" />
+        </NavLink>
       </Content>
     </Container>
     </div>
