@@ -1,33 +1,61 @@
-import { useState } from "react";
-import ModalAtivo from "./ModalAtivos";
+import { useEffect, useState } from "react";
 import { ButtonAction, ButtonAdd, ButtonDiv, Container, Table, TableItem, TAction, Tbody, TbSection, Thead, TitleTable } from "./styles";
 import { AiOutlinePlus } from 'react-icons/ai'
 import { BsFillTrashFill, BsFillPencilFill } from 'react-icons/bs'
+import axios from 'axios';
+import ModalManutencao from "./ModalManutencao";
+import ModalManutencaoUpdate from "./ModalManutencaoUpdate";
 
 export default function Manutencao() {
 
     const [open, setOpen] = useState(false)
+    const [openEdit, setOpenEdit] = useState(false)
+    const [manutencoes, setManutencoes] = useState([])
+    const [idEdit, setIdEdit] = useState()
 
-    const Item = [
-        {
-            Data_Envio: '27/04/2002',
-            Valor: '13123123123',
-            Descricao: 'rua alzino martelo',
-            Data_solucao: '27/04/2002',
-            Prestador: 'Prestador',
-            Ativo: 'Ativo'
-        },
 
-        {
-            Data_Envio: '25/06/2002',
-            Valor: '13123123123',
-            Descricao: 'rua alzino martelo',
-            Data_solucao: '27/04/2002',
-            Prestador: 'Prestador',
-            Ativo: 'Ativo'
-        },
+    const deleteManutencao = async (id) => {
+        try {
+            await axios({
+                    method: "delete",
+                    url: `http://localhost:3001/manutencao/${id}`,
+                    params: {
+                       id: id
+                    },
+                  }).then(function (response) {
+                    alert('conteudo deletado com sucesso')
+                    console.log(response)
+                  });
+            }
+            catch (error) {
+                console.log(error)
+            }
+    }
 
-    ]
+    const openEditManutencao = (id) => {
+        setIdEdit(id)
+        setOpenEdit(true)
+    }
+
+    useEffect(() => {
+        const getManutencao = async() => {
+            try {
+                axios({
+                    method: "get",
+                    url: "http://localhost:3001/manutencao",
+                    responseType: "json",
+                  }).then(function (response) {
+                    setManutencoes(response.data)
+                    console.log(response)
+                  });
+            } catch (error) {
+                console.log(alert)
+            }
+        }
+
+        getManutencao()
+    }, [])
+
 
     return(
         <Container>
@@ -37,7 +65,8 @@ export default function Manutencao() {
             <ButtonDiv>
                 <ButtonAdd onClick={() => setOpen(!open)}>Adicionar<AiOutlinePlus/></ButtonAdd>
             </ButtonDiv>
-            <ModalAtivo open={open} onChangeOpen={() => setOpen(!open)} />
+            <ModalManutencao open={open} onChangeOpen={() => setOpen(!open)} />
+            <ModalManutencaoUpdate  open={openEdit} onChangeOpen={() => setOpenEdit(!openEdit)} id={idEdit} />
             <Table>
                <Thead>
                     <TableItem>Data_Envio</TableItem>
@@ -49,20 +78,20 @@ export default function Manutencao() {
                     <TableItem>Acoes:</TableItem>
                </Thead>
                <Tbody>
-                   {Item.map(item => (
+                   {manutencoes.map(item => (
                         <>
-                            <TableItem>{item.Data_Envio}</TableItem>
+                            <TableItem>{item.DataEnvio}</TableItem>
                             <TableItem>{item.Valor}</TableItem>
                             <TableItem>{item.Descricao}</TableItem>
-                            <TableItem>{item.Data_solucao}</TableItem>
-                            <TableItem>{item.Prestador}</TableItem>
-                            <TableItem>{item.Ativo}</TableItem>
+                            <TableItem>{item.DataSolucao}</TableItem>
+                            <TableItem>{item.prestador?.Nome}</TableItem>
+                            <TableItem>{item.ativo?.Descricao}</TableItem>
                             <TAction>
-                                <ButtonAction>
+                                <ButtonAction onClick={() => deleteManutencao(item.id)}>
                                     <BsFillTrashFill />
                                 </ButtonAction>
                                 <ButtonAction>
-                                    <BsFillPencilFill />
+                                    <BsFillPencilFill onClick={() => openEditManutencao(item.id)}/>
                                 </ButtonAction>
                             </TAction>
                         </>

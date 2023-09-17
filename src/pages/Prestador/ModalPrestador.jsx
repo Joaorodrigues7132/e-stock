@@ -1,0 +1,113 @@
+import { BackModal, Modal, Field, Input, Select, ModalFields, ModalHeader, Button } from "./modalStyles";
+
+import { AiOutlineClose } from 'react-icons/ai'
+import { useEffect, useState } from "react";
+import axios from 'axios';
+
+export default function ModalPrestador({open, onChangeOpen}) {
+
+    const [descricao, setDescricao] = useState('')
+    const [nome, setNome] = useState('')
+    const [telefone, setTelefone] = useState('')
+    const [endereco, setEndereco] = useState('')
+
+    const [propietarios, setPropietarios] = useState([])
+
+    const propietario = document.getElementById('propietario')
+
+    useEffect(() => {
+        const getPropietario = async() => {
+            try {
+                axios({
+                    method: "get",
+                    url: "http://localhost:3001/propietario",
+                    responseType: "json",
+                  }).then(function (response) {
+                    setPropietarios(response.data)
+                    console.log(response)
+                  });
+            } catch (error) {
+                console.log(alert)
+            }
+        }
+
+        getPropietario()
+    }, [])
+
+    const savePrestador = async () => {
+        try {
+            if(nome !== '' && descricao !== '' && endereco !== '' && telefone !== '' && propietario.value !== 'Selecione um Propietario'){
+                await axios({
+                    method: "post",
+                    url: "http://localhost:3001/prestador",
+                    data: {
+                        Nome: nome,
+                        Descricao: descricao,
+                        Endereco: endereco,
+                        Telefone: telefone,
+                        proprietarioId: Number(propietario.value),
+                    },
+                  }).then(function (response) {
+                    alert('conteudo salvo com sucesso')
+                    console.log(response)
+                  });
+            } else {
+                alert('preencha os campos')
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+
+
+   {if(open) {
+    return(
+        (
+            <BackModal>
+                <Modal>
+                    <ModalHeader>
+                        <Button onClick={() =>onChangeOpen(!open)}><AiOutlineClose /></Button>
+                    </ModalHeader>
+                    <ModalFields>
+                        <Field>
+                            <p>Nome:</p>
+                            <Input id="nome"  value={nome} onChange={(e) => setNome(e.target.value)} />
+                        </Field>
+        
+                        <Field>
+                            <p> Telefone:</p>
+                            <Input id="telefone"  value={telefone} onChange={(e) => setTelefone(e.target.value)} />
+                        </Field>
+        
+                        <Field>
+                            <p>Endereco:</p>
+                            <Input id="endereco"  value={endereco} onChange={(e) => setEndereco(e.target.value)} />
+                        </Field>
+        
+                        <Field>
+                            <p>Descricao:</p>
+                            <Input id="desc"  value={descricao} onChange={(e) => setDescricao(e.target.value)} />
+                        </Field>
+
+                        <Field>
+                            <p>Proprietario:</p>
+                            <Select id="propietario">
+                                <option>Selecione um Propietario</option>
+                                {propietarios.map((e) => {
+                                    return <option value={e.id}>{e.Nome}</option>
+                                })}
+                            </Select>
+                        </Field>
+
+
+                        <Button spaced="15px" fill="rgba(33, 217, 82, 0.8)" size="100%" onClick={() =>savePrestador()}>Salvar</Button>
+                    </ModalFields>
+                </Modal>   
+            </BackModal> 
+        )
+    )
+   } else {
+    return undefined
+   }}
+}

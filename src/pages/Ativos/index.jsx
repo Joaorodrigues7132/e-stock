@@ -1,54 +1,60 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ModalAtivo from "./ModalAtivos";
 import { ButtonAction, ButtonAdd, ButtonDiv, Container, Table, TableItem, TAction, Tbody, TbSection, Thead, TitleTable } from "./styles";
 import { AiOutlinePlus } from 'react-icons/ai'
 import { BsFillTrashFill, BsFillPencilFill } from 'react-icons/bs'
+import ModalAtivoUpdate from "./ModalAtivoUpdate";
+import axios from 'axios';
 
 export default function Ativos() {
 
     const [open, setOpen] = useState(false)
+    const [openEdit, setOpenEdit] = useState(false)
+    const [ativos, setAtivos] = useState([])
+    const [idEdit, setIdEdit] = useState()
 
-    const Item = [
-        {
-            Marca: 'Mazeratti',
-            Estoque: '10',
-            Classe: 'Carro',
-            Descricao: 'Carro esportivo',
-            Proprietrio: 'Isaac',
-            Modelo: '2022',
-            Posto: 18
-        },
+    const deleteAtivo = async (id) => {
+        try {
+            await axios({
+                    method: "delete",
+                    url: `http://localhost:3001/ativo/${id}`,
+                    params: {
+                       id: id
+                    },
+                  }).then(function (response) {
+                    alert('conteudo deletado com sucesso')
+                    console.log(response)
+                  });
+            }
+            catch (error) {
+                console.log(error)
+            }
+    }
 
-        {
-            Marca: 'Mazeratti',
-            Estoque: '10',
-            Classe: 'Carro',
-            Descricao: 'Carro esportivo',
-            Proprietrio: 'Isaac',
-            Modelo: '2022',
-            Posto: 18
-        },
+    const openEditAtivo = (id) => {
+        setIdEdit(id)
+        setOpenEdit(true)
+    }
 
-        {
-            Marca: 'Mazeratti',
-            Estoque: '10',
-            Classe: 'Carro',
-            Descricao: 'Carro esportivo',
-            Proprietrio: 'Isaac',
-            Modelo: '2022',
-            Posto: 18
-        },
-
-        {
-            Marca: 'Mazeratti',
-            Estoque: '10',
-            Classe: 'Carro',
-            Descricao: 'Carro esportivo',
-            Proprietrio: 'Isaac',
-            Modelo: '2022',
-            Posto: 18
+    useEffect(() => {
+        const getAtivo = async() => {
+            try {
+                axios({
+                    method: "get",
+                    url: "http://localhost:3001/ativo",
+                    responseType: "json",
+                  }).then(function (response) {
+                    setAtivos(response.data)
+                    console.log(response)
+                  });
+            } catch (error) {
+                console.log(alert)
+            }
         }
-    ]
+
+        getAtivo()
+    }, [])
+
 
     return(
         <Container>
@@ -59,6 +65,7 @@ export default function Ativos() {
                 <ButtonAdd onClick={() => setOpen(!open)}>Adicionar<AiOutlinePlus/></ButtonAdd>
             </ButtonDiv>
             <ModalAtivo open={open} onChangeOpen={() => setOpen(!open)} />
+            <ModalAtivoUpdate  open={openEdit} onChangeOpen={() => setOpenEdit(!openEdit)} id={idEdit} />
             <Table>
                <Thead>
                     <TableItem>Marca</TableItem>
@@ -67,25 +74,23 @@ export default function Ativos() {
                     <TableItem>Descricao</TableItem>
                     <TableItem>Proprietario</TableItem>
                     <TableItem>Modelo</TableItem>
-                    <TableItem>Posto</TableItem>
                     <TableItem>Acoes: </TableItem>
                </Thead>
                <Tbody>
-                   {Item.map(item => (
+                   {ativos.map(item => (
                         <>
                             <TableItem>{item.Marca}</TableItem>
-                            <TableItem>{item.Estoque}</TableItem>
-                            <TableItem>{item.Classe}</TableItem>
+                            <TableItem>{item.estoque?.Nome}</TableItem>
+                            <TableItem>{item.classe?.Nome}</TableItem>
                             <TableItem>{item.Descricao}</TableItem>
-                            <TableItem>{item.Proprietrio}</TableItem>
+                            <TableItem>{item.propietario?.Nome}</TableItem>
                             <TableItem>{item.Modelo}</TableItem>
-                            <TableItem>{item.Posto}</TableItem>
                             <TAction>
-                                <ButtonAction>
+                                <ButtonAction onClick={() => deleteAtivo(item.id)}>
                                     <BsFillTrashFill />
                                 </ButtonAction>
                                 <ButtonAction>
-                                    <BsFillPencilFill />
+                                    <BsFillPencilFill onClick={() => openEditAtivo(item.id)}/>
                                 </ButtonAction>
                             </TAction>
                         </>
