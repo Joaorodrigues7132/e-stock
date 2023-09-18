@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import axios from 'axios';
 import InputMask from "react-input-mask"
 
+
 export default function ModalManutencao({ open, onChangeOpen }) {
 
     const [dataEnvio, setDataEnvio] = useState('')
@@ -102,18 +103,12 @@ export default function ModalManutencao({ open, onChangeOpen }) {
                                     </InputMask>
 
                                 </Field>
-
-
+                                
                                 <Field>
-                                    <p>Valor:</p>
-                                    <InputMask
-                                        mask="R$ 99,999.99"
-                                        value={valor}
-                                        onChange={(e) => setValor(e.target.value)}
-                                    >
-                                        {(inputProps) => <Input {...inputProps} type="text" placeholder="R$ 0,00" />}
-                                    </InputMask>
-                                </Field>
+                            <p>Valor:</p>
+                            <Input id="valor" value={valor} onChange={(e) => setValor(e.target.value)} />
+                        </Field>
+        
 
                                 <Field>
                                     <p>Descrição:</p>
@@ -121,10 +116,17 @@ export default function ModalManutencao({ open, onChangeOpen }) {
                                 </Field>
 
                                 <Field>
-                                    <p>Data Solução:</p>
-                                    <Input value={dataSolucao} onChange={(e) => setDataSolucao(e.target.value)} />
-                                </Field>
 
+                                    <p>Data Solução:</p>
+                                    <InputMask
+                                        mask="99/99/9999"
+                                        value={dataSolucao}
+                                        onChange={(e) => setDataSolucao(e.target.value)}
+                                    >
+                                        {(inputProps) => <Input {...inputProps} type="text" placeholder="dd/mm/aaaa" />}
+                                    </InputMask>
+
+                                </Field>
                                 <Field>
                                     <p>Prestador:</p>
                                     <Select id="prestador">

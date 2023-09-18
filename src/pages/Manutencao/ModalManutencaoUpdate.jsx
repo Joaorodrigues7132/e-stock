@@ -4,6 +4,7 @@ import { AiOutlineClose } from 'react-icons/ai'
 
 import axios from 'axios';
 import {useEffect, useState } from "react";
+import InputMask from "react-input-mask"
 
 export default function ModalManutencaoUpdate({open, onChangeOpen, id}) {
 
@@ -149,9 +150,16 @@ export default function ModalManutencaoUpdate({open, onChangeOpen, id}) {
                     </ModalHeader>
                     <ModalFields>     
                     <Field>
-                            <p>Data Envio:</p>
-                            <Input id="dataEnvio" value={dataEnvio} onChange={(e) => setDataEnvio(e.target.value)} />
-                        </Field>
+                                    <p>Data Envio:</p>
+                                    <InputMask
+                                        mask="99/99/9999"
+                                        value={dataEnvio}
+                                        onChange={(e) => setDataEnvio(e.target.value)}
+                                    >
+                                        {(inputProps) => <Input {...inputProps} type="text" placeholder="dd/mm/aaaa" />}
+                                    </InputMask>
+
+                                </Field>
         
                         <Field>
                             <p>Valor:</p>
@@ -164,9 +172,17 @@ export default function ModalManutencaoUpdate({open, onChangeOpen, id}) {
                         </Field>
         
                         <Field>
-                            <p>Data Solução:</p>
-                            <Input id="dataSolucao" value={dataSolucao} onChange={(e) => setDataSolucao(e.target.value)} />
-                        </Field>
+                                
+                                <p>Data Solução:</p>
+                                    <InputMask
+                                        mask="99/99/9999"
+                                        value={dataSolucao}
+                                        onChange={(e) => setDataSolucao(e.target.value)}
+                                    >
+                                        {(inputProps) => <Input {...inputProps} type="text" placeholder="dd/mm/aaaa" />}
+                                    </InputMask>
+
+                                </Field>
 
                         <Field>
                             <p>Prestador:</p>
