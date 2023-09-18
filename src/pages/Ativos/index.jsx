@@ -5,30 +5,30 @@ import { AiOutlinePlus } from 'react-icons/ai'
 import { BsFillTrashFill, BsFillPencilFill } from 'react-icons/bs'
 import ModalAtivoUpdate from "./ModalAtivoUpdate";
 import axios from 'axios';
+import ModalAtivoDelete from "./ModalAtivoDelete";
 
 export default function Ativos() {
 
     const [open, setOpen] = useState(false)
     const [openEdit, setOpenEdit] = useState(false)
+    const [openDelete, setOpenDelete] = useState(false)
     const [ativos, setAtivos] = useState([])
     const [idEdit, setIdEdit] = useState()
+    const [idDelete, setIdDelete] = useState()
 
-    const deleteAtivo = async (id) => {
+    const getAtivo = async() => {
         try {
-            await axios({
-                    method: "delete",
-                    url: `http://localhost:3001/ativo/${id}`,
-                    params: {
-                       id: id
-                    },
-                  }).then(function (response) {
-                    alert('conteudo deletado com sucesso')
-                    console.log(response)
-                  });
-            }
-            catch (error) {
-                console.log(error)
-            }
+            axios({
+                method: "get",
+                url: "http://localhost:3001/ativo",
+                responseType: "json",
+              }).then(function (response) {
+                setAtivos(response.data)
+                console.log(response)
+              });
+        } catch (error) {
+            console.log(alert)
+        }
     }
 
     const openEditAtivo = (id) => {
@@ -36,24 +36,30 @@ export default function Ativos() {
         setOpenEdit(true)
     }
 
-    useEffect(() => {
-        const getAtivo = async() => {
-            try {
-                axios({
-                    method: "get",
-                    url: "http://localhost:3001/ativo",
-                    responseType: "json",
-                  }).then(function (response) {
-                    setAtivos(response.data)
-                    console.log(response)
-                  });
-            } catch (error) {
-                console.log(alert)
-            }
-        }
+    const openDeleteAtivo = (id) => {
+        setIdDelete(id)
+        setOpenDelete(true)
+    }
 
+
+    useEffect(() => {
         getAtivo()
     }, [])
+
+    const closeModal = () => {
+        setOpen(!open)
+        getAtivo()
+    }
+
+    const closeModalEdit = () => {
+        setOpenEdit(!openEdit)
+        getAtivo()
+    }
+
+    const closeModalDelete = () => {
+        setOpenDelete(!openDelete)
+        getAtivo()
+    }
 
 
     return(
@@ -64,8 +70,9 @@ export default function Ativos() {
             <ButtonDiv>
                 <ButtonAdd onClick={() => setOpen(!open)}>Adicionar<AiOutlinePlus/></ButtonAdd>
             </ButtonDiv>
-            <ModalAtivo open={open} onChangeOpen={() => setOpen(!open)} />
-            <ModalAtivoUpdate  open={openEdit} onChangeOpen={() => setOpenEdit(!openEdit)} id={idEdit} />
+            <ModalAtivo open={open} onChangeOpen={() => closeModal()} />
+            <ModalAtivoUpdate  open={openEdit} onChangeOpen={() => closeModalEdit()} id={idEdit} />
+            <ModalAtivoDelete  open={openDelete} onChangeOpen={() => closeModalDelete()} id={idDelete} />
             <Table>
                <Thead>
                     <TableItem>Marca</TableItem>
@@ -86,7 +93,7 @@ export default function Ativos() {
                             <TableItem>{item.propietario?.Nome}</TableItem>
                             <TableItem>{item.Modelo}</TableItem>
                             <TAction>
-                                <ButtonAction onClick={() => deleteAtivo(item.id)}>
+                                <ButtonAction onClick={() => openDeleteAtivo(item.id)}>
                                     <BsFillTrashFill />
                                 </ButtonAction>
                                 <ButtonAction>

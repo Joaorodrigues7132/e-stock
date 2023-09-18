@@ -1,7 +1,6 @@
 import { BackModal, Modal, Field, Input, Select, ModalFields, ModalHeader, Button } from "./modalStyles";
-
 import { AiOutlineClose } from 'react-icons/ai'
-
+import InputMask from "react-input-mask"
 import axios from 'axios';
 import {useEffect, useState } from "react";
 
@@ -59,16 +58,14 @@ export default function ModalManutencaoUpdate({open, onChangeOpen, id}) {
         conteudoElemento.pop()
         const conteudoElementoFiltrado = conteudoElemento.map(e => e + "</option>")
         const dadoDaRequisicao = conteudoElementoFiltrado.find(e => e === `<option value="${idRequest}">${nome}</option>`)
-        if(dadoDaRequisicao) {
+        arr.push(`<option value="${idRequest}">${nome}</option>`)
             for(let i = 1; i <= conteudoElementoFiltrado.length; i++) {
-                if (conteudoElementoFiltrado[i] = `<option value="${idRequest}">${nome}</option>`) {
+                if (conteudoElementoFiltrado[i] == dadoDaRequisicao) {
                     i++;
                 }
                 arr.push(conteudoElementoFiltrado[i])
             }
             arr.pop()
-            arr.push(`<option value="${idRequest}">${nome}</option>`)
-       }
        elemento.innerHTML = ""
        arr.map(e => {
         return elemento.innerHTML += e
@@ -76,7 +73,7 @@ export default function ModalManutencaoUpdate({open, onChangeOpen, id}) {
     }
 
     const fillInputs = (response) => {
-        fillSelect('ativo', response?.ativo?.Marca, response?.ativoId)
+        fillSelect('ativo', response?.ativo?.Descricao, response?.ativoId)
         fillSelect('prestador', response?.prestador?.Nome, response?.prestadorId)
 
         const DataEnvio = document.getElementById("dataEnvio")
@@ -155,7 +152,7 @@ export default function ModalManutencaoUpdate({open, onChangeOpen, id}) {
         
                         <Field>
                             <p>Valor:</p>
-                            <Input id="valor" value={valor} onChange={(e) => setValor(e.target.value)} />
+                            <Input id="valor" value={valor} onChange={(e) => setValor(e.target.value)} placeholder="R$" type="number"/>
                         </Field>
         
                         <Field>
@@ -165,7 +162,14 @@ export default function ModalManutencaoUpdate({open, onChangeOpen, id}) {
         
                         <Field>
                             <p>Data Solução:</p>
-                            <Input id="dataSolucao" value={dataSolucao} onChange={(e) => setDataSolucao(e.target.value)} />
+                            <InputMask
+                                mask="99/99/9999"
+                                value={dataSolucao}
+                                onChange={(e) => setDataSolucao(e.target.value)}
+                                id="dataSolucao"
+                            >
+                                {(inputProps) => <Input {...inputProps} type="text" placeholder="dd/mm/aaaa" />}
+                            </InputMask>
                         </Field>
 
                         <Field>
@@ -183,7 +187,7 @@ export default function ModalManutencaoUpdate({open, onChangeOpen, id}) {
                             <Select id="ativo"> 
                             <option>Selecione um Ativo</option>
                                 {ativos.map((e) => {
-                                    return <option value={e.id}>{e.Marca}</option>
+                                    return <option value={e.id}>{e.Descricao}</option>
                             })}
                             </Select>
                         </Field>

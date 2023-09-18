@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container, Content } from './styles'
+import { BackSideBar, Container, Content } from './styles'
 import { 
     AiOutlineClose
 } from 'react-icons/ai'
@@ -26,6 +26,7 @@ export default function Sidebar({ active }){
 
   return (
     <div>
+    <BackSideBar onClick={closeSidebar} />
     <Container sidebar={active}>
       <AiOutlineClose onClick={closeSidebar} />  
       <Content>

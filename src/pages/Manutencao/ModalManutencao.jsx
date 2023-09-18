@@ -58,7 +58,7 @@ export default function ModalManutencao({ open, onChangeOpen }) {
             if (dataEnvio !== '' && descricao !== '' && dataSolucao !== '' && valor !== '' && prestador.value !== 'Selecione um Prestador' && ativo.value !== 'Selecione uma Ativo') {
                 await axios({
                     method: "post",
-                    url: "http://localhost:3001/manutencao",
+                    url: `http://localhost:3001/manutencao`,
                     data: {
                         DataEnvio: dataEnvio,
                         Descricao: descricao,
@@ -67,10 +67,10 @@ export default function ModalManutencao({ open, onChangeOpen }) {
                         prestadorId: Number(prestador.value),
                         ativoId: Number(ativo.value)
                     },
-                }).then(function (response) {
+                  }).then(function (response) {
                     alert('conteudo salvo com sucesso')
                     console.log(response)
-                });
+                  });
             } else {
                 alert('preencha os campos')
             }
@@ -106,13 +106,7 @@ export default function ModalManutencao({ open, onChangeOpen }) {
 
                                 <Field>
                                     <p>Valor:</p>
-                                    <InputMask
-                                        mask="R$ 99,999.99"
-                                        value={valor}
-                                        onChange={(e) => setValor(e.target.value)}
-                                    >
-                                        {(inputProps) => <Input {...inputProps} type="text" placeholder="R$ 0,00" />}
-                                    </InputMask>
+                                    <Input id="valor" value={valor} onChange={(e) => setValor(e.target.value)} placeholder="R$" type="number" />
                                 </Field>
 
                                 <Field>
@@ -122,7 +116,13 @@ export default function ModalManutencao({ open, onChangeOpen }) {
 
                                 <Field>
                                     <p>Data Solução:</p>
-                                    <Input value={dataSolucao} onChange={(e) => setDataSolucao(e.target.value)} />
+                                    <InputMask
+                                        mask="99/99/9999"
+                                        value={dataSolucao}
+                                        onChange={(e) => setDataSolucao(e.target.value)}
+                                    >
+                                        {(inputProps) => <Input {...inputProps} type="text" placeholder="dd/mm/aaaa" />}
+                                    </InputMask>
                                 </Field>
 
                                 <Field>

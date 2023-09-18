@@ -4,6 +4,7 @@ export const Container = styled.div`
   background-color: black;
   position: fixed;
   height: 100%;
+  z-index: 2;
   top: 0px;
   left: 0px;
   width: 300px;
@@ -33,3 +34,13 @@ export const Container = styled.div`
 export const Content = styled.div`
   margin-top: 100px;
 `;
+
+export const BackSideBar = styled.div`
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.3);
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  top: 0px;
+  left: 0px;
+`
