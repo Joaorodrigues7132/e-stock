@@ -59,7 +59,7 @@ export default function Proprietario() {
     return(
         <Container>
             <TitleTable>
-            <h1>Proprietario</h1>
+            <h1>Proprietário</h1>
             </TitleTable>
             <ButtonDiv>
                 <ButtonAdd onClick={() => setOpen(!open)}>Adicionar<AiOutlinePlus/></ButtonAdd>
@@ -70,8 +70,8 @@ export default function Proprietario() {
                <Thead>
                     <TableItem>Nome</TableItem>
                     <TableItem>Contato</TableItem>
-                    <TableItem>Descricao</TableItem>
-                    <TableItem>Acoes:</TableItem>
+                    <TableItem>Descrição</TableItem>
+                    <TableItem>Ações:</TableItem>
                </Thead>
                <Tbody>
                    {propietarios.map(item => (

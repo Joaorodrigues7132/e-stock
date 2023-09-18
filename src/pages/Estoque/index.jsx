@@ -71,7 +71,7 @@ export default function Estoque() {
                     
                     <TableItem>Endereço</TableItem>
                     <TableItem>Nome</TableItem>
-                    <TableItem>Telefone</TableItem>
+                    <TableItem>Contato</TableItem>
                     <TableItem>Descrição</TableItem>
                     <TableItem>Ações</TableItem>
                </Thead>

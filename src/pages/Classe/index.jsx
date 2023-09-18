@@ -70,8 +70,8 @@ export default function Classe() {
                <Thead>
                     
                     <TableItem>Nome</TableItem>
-                    <TableItem>Descricao</TableItem>
-                    <TableItem>Acoes: </TableItem>
+                    <TableItem>Descrição</TableItem>
+                    <TableItem>Ações</TableItem>
                </Thead>
                <Tbody>
                    {classes.map(item => (

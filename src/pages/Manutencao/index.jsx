@@ -60,7 +60,7 @@ export default function Manutencao() {
     return(
         <Container>
             <TitleTable>
-            <h1>Manutencao</h1>
+            <h1>Manutenção</h1>
             </TitleTable>
             <ButtonDiv>
                 <ButtonAdd onClick={() => setOpen(!open)}>Adicionar<AiOutlinePlus/></ButtonAdd>
@@ -69,13 +69,13 @@ export default function Manutencao() {
             <ModalManutencaoUpdate  open={openEdit} onChangeOpen={() => setOpenEdit(!openEdit)} id={idEdit} />
             <Table>
                <Thead>
-                    <TableItem>Data_Envio</TableItem>
+                    <TableItem>Data Envio</TableItem>
                     <TableItem>Valor</TableItem>
-                    <TableItem>Descricao</TableItem>
-                    <TableItem>Data_solucao</TableItem>
-                    <TableItem>Prestador:</TableItem>
-                    <TableItem>Ativo:</TableItem>
-                    <TableItem>Acoes:</TableItem>
+                    <TableItem>Descrição</TableItem>
+                    <TableItem>Data Solução</TableItem>
+                    <TableItem>Prestador</TableItem>
+                    <TableItem>Ativo</TableItem>
+                    <TableItem>Ações</TableItem>
                </Thead>
                <Tbody>
                    {manutencoes.map(item => (

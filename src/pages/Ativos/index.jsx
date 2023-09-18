@@ -71,10 +71,10 @@ export default function Ativos() {
                     <TableItem>Marca</TableItem>
                     <TableItem>Estoque</TableItem>
                     <TableItem>Classe</TableItem>
-                    <TableItem>Descricao</TableItem>
-                    <TableItem>Proprietario</TableItem>
+                    <TableItem>Descrição</TableItem>
+                    <TableItem>Proprietário</TableItem>
                     <TableItem>Modelo</TableItem>
-                    <TableItem>Acoes: </TableItem>
+                    <TableItem>Ações</TableItem>
                </Thead>
                <Tbody>
                    {ativos.map(item => (

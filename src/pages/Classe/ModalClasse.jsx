@@ -47,7 +47,7 @@ export default function ModalClasse({open, onChangeOpen}) {
                         </Field>
         
                         <Field>
-                            <p>Descricao:</p>
+                            <p>Descrição:</p>
                             <Input value={descricao} onChange={(e) => setDescricao(e.target.value)} />
                         </Field>
 

@@ -81,19 +81,19 @@ export default function ModalPrestador({open, onChangeOpen}) {
                         </Field>
         
                         <Field>
-                            <p>Endereco:</p>
+                            <p>Endereço:</p>
                             <Input id="endereco"  value={endereco} onChange={(e) => setEndereco(e.target.value)} />
                         </Field>
         
                         <Field>
-                            <p>Descricao:</p>
+                            <p>Descrição:</p>
                             <Input id="desc"  value={descricao} onChange={(e) => setDescricao(e.target.value)} />
                         </Field>
 
                         <Field>
-                            <p>Proprietario:</p>
+                            <p>Proprietário:</p>
                             <Select id="propietario">
-                                <option>Selecione um Propietario</option>
+                                <option>Selecione um Propietário</option>
                                 {propietarios.map((e) => {
                                     return <option value={e.id}>{e.Nome}</option>
                                 })}

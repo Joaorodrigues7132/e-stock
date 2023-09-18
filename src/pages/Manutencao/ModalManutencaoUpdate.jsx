@@ -159,12 +159,12 @@ export default function ModalManutencaoUpdate({open, onChangeOpen, id}) {
                         </Field>
         
                         <Field>
-                            <p>Descricao:</p>
+                            <p>Descrição:</p>
                             <Input id="desc" value={descricao} onChange={(e) => setDescricao(e.target.value)} />
                         </Field>
         
                         <Field>
-                            <p>Data Solucao:</p>
+                            <p>Data Solução:</p>
                             <Input id="dataSolucao" value={dataSolucao} onChange={(e) => setDataSolucao(e.target.value)} />
                         </Field>
 

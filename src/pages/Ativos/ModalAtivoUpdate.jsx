@@ -178,7 +178,7 @@ export default function ModalAtivoUpdate({open, onChangeOpen, id}) {
                         </Field>
         
                         <Field>
-                            <p>Descricao:</p>
+                            <p>Descrição:</p>
                             <Input id="desc" value={descricao} onChange={(e) => setDescricao(e.target.value)} />
                         </Field>
         
@@ -193,9 +193,9 @@ export default function ModalAtivoUpdate({open, onChangeOpen, id}) {
                         </Field>
         
                         <Field>
-                            <p>Proprietario:</p>
+                            <p>Proprietário:</p>
                             <Select id="propietario">
-                                <option>Selecione um Propietario</option>
+                                <option>Selecione um Propietário</option>
                                 {propietarios.map((e) => {
                                     return <option value={e.id}>{e.Nome}</option>
                                 })}

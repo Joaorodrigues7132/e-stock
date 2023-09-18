@@ -70,10 +70,10 @@ export default function Prestador() {
                <Thead>
                     <TableItem>Nome</TableItem>
                     <TableItem>Telefone</TableItem>
-                    <TableItem>Endereco</TableItem>
-                    <TableItem>Descricao</TableItem>
-                    <TableItem>Proprietario:</TableItem>
-                    <TableItem>Acoes:</TableItem>
+                    <TableItem>Endereço</TableItem>
+                    <TableItem>Descrição</TableItem>
+                    <TableItem>Proprietário</TableItem>
+                    <TableItem>Ações</TableItem>
                </Thead>
                <Tbody>
                    {prestadores.map(item => (

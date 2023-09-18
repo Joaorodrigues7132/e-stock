@@ -4,6 +4,8 @@ import { AiOutlineClose } from 'react-icons/ai'
 
 import axios from 'axios';
 import {useState } from "react";
+import InputMask from "react-input-mask";
+
 
 export default function ModalEstoqueUpdate({open, onChangeOpen, id}) {
 
@@ -84,7 +86,7 @@ export default function ModalEstoqueUpdate({open, onChangeOpen, id}) {
                     </ModalHeader>
                     <ModalFields>
                         <Field>
-                            <p>Endereco:</p>
+                            <p>Endereço:</p>
                             <Input id="endereco" onChange={(e) => setEndereco(e.target.value)} />
                         </Field>
         
@@ -93,13 +95,20 @@ export default function ModalEstoqueUpdate({open, onChangeOpen, id}) {
                             <Input id="nome"  onChange={(e) => setNome(e.target.value)}/>
                         </Field>
         
+                        
                         <Field>
-                            <p>Telefone:</p>
-                            <Input id="telefone" onChange={(e) => setTelefone(e.target.value)} />
-                        </Field>
-        
+                                <p>Contato:</p>
+                                    <InputMask
+                                        mask="(99)9999-9999"
+                                        value={telefone}
+                                        onChange={(e) => setTelefone(e.target.value)}
+                                    >
+                                        {(inputProps) => <Input {...inputProps} type="tel" placeholder="" />}
+                                    </InputMask>
+
+                                </Field>
                         <Field>
-                            <p>Descicao:</p>
+                            <p>Descrição:</p>
                             <Input id="desc"   onChange={(e) => setDescricao(e.target.value)} />
                         </Field>        
                         <Button spaced="15px" fill="rgba(33, 217, 82, 0.8)" size="100%" onClick={() => updateEstoque(id)}>Editar</Button>
