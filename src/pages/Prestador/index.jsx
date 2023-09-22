@@ -5,55 +5,60 @@ import { BsFillTrashFill, BsFillPencilFill } from 'react-icons/bs'
 import axios from 'axios';
 import ModalPrestador from "./ModalPrestador";
 import ModalPrestadorUpdate from "./ModalPrestadorUpdate";
+import ModalPrestadorDelete from "./ModalPrestadorDelete";
 
 export default function Prestador() {
 
     const [open, setOpen] = useState(false)
     const [openEdit, setOpenEdit] = useState(false)
+    const [openDelete, setOpenDelete] = useState(false)
     const [prestadores, setPrestadores] = useState([])
     const [idEdit, setIdEdit] = useState()
-
-    const deletePrestador = async (id) => {
-        try {
-            await axios({
-                    method: "delete",
-                    url: `http://localhost:3001/prestador/${id}`,
-                    params: {
-                       id: id
-                    },
-                  }).then(function (response) {
-                    alert('conteudo deletado com sucesso')
-                    console.log(response)
-                  });
-            }
-            catch (error) {
-                console.log(error)
-            }
-    }
+    const [idDelete, setIdDelete] = useState()
 
     const openEditPrestador = (id) => {
         setIdEdit(id)
         setOpenEdit(true)
     }
 
-    useEffect(() => {
-        const getPrestador = async() => {
-            try {
-                axios({
-                    method: "get",
-                    url: "http://localhost:3001/prestador",
-                    responseType: "json",
-                  }).then(function (response) {
-                    setPrestadores(response.data)
-                    console.log(response)
-                  });
-            } catch (error) {
-                console.log(alert)
-            }
-        }
+    const openDeletePrestador = (id) => {
+        setIdDelete(id)
+        setOpenDelete(true)
+    }
 
+    const getPrestador = async() => {
+        try {
+            axios({
+                method: "get",
+                url: "http://localhost:3001/prestador",
+                responseType: "json",
+              }).then(function (response) {
+                setPrestadores(response.data)
+                console.log(response)
+              });
+        } catch (error) {
+            console.log(alert)
+        }
+    }
+
+    useEffect(() => {
         getPrestador()
     }, [])
+
+    const closeModal = () => {
+        setOpen(!open)
+        getPrestador()
+    }
+
+    const closeModalEdit = () => {
+        setOpenEdit(!openEdit)
+        getPrestador()
+    }
+
+    const closeModalDelete = () => {
+        setOpenDelete(!openDelete)
+        getPrestador()
+    }
 
 
     return(
@@ -64,8 +69,9 @@ export default function Prestador() {
             <ButtonDiv>
                 <ButtonAdd onClick={() => setOpen(!open)}>Adicionar<AiOutlinePlus/></ButtonAdd>
             </ButtonDiv>
-            <ModalPrestador open={open} onChangeOpen={() => setOpen(!open)} />
-            <ModalPrestadorUpdate open={openEdit} onChangeOpen={() => setOpenEdit(!openEdit)} id={idEdit} />
+            <ModalPrestador open={open} onChangeOpen={() => closeModal()} />
+            <ModalPrestadorUpdate open={openEdit} onChangeOpen={() => closeModalEdit()} id={idEdit} />
+            <ModalPrestadorDelete  open={openDelete} onChangeOpen={() => closeModalDelete()} id={idDelete} />
             <Table>
                <Thead>
                     <TableItem>Nome</TableItem>
@@ -84,7 +90,7 @@ export default function Prestador() {
                             <TableItem>{item.Descricao}</TableItem>
                             <TableItem>{item.propietario?.Nome}</TableItem>
                             <TAction>
-                                <ButtonAction onClick={() => deletePrestador(item.id)}>
+                                <ButtonAction onClick={() => openDeletePrestador(item.id)}>
                                     <BsFillTrashFill />
                                 </ButtonAction>
                                 <ButtonAction>

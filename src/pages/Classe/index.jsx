@@ -5,31 +5,31 @@ import { BsFillTrashFill, BsFillPencilFill } from 'react-icons/bs'
 import axios from 'axios';
 import ModalClasse from "./ModalClasse";
 import ModalClasseUpdate from "./ModalClasseUpdate";
+import ModalClasseDelete from "./ModalClasseDelete";
 
 
 export default function Classe() {
 
     const [open, setOpen] = useState(false)
     const [openEdit, setOpenEdit] = useState(false)
+    const [openDelete, setOpenDelete] = useState(false)
     const [classes, setClasses] = useState([])
     const [idEdit, setIdEdit] = useState()
+    const [idDelete, setIdDelete] = useState()
 
-    const deleteClasse = async (id) => {
+    const getClasse = async() => {
         try {
-            await axios({
-                    method: "delete",
-                    url: `http://localhost:3001/classe/${id}`,
-                    params: {
-                       id: id
-                    },
-                  }).then(function (response) {
-                    alert('conteudo deletado com sucesso')
-                    console.log(response)
-                  });
-            }
-            catch (error) {
-                console.log(error)
-            }
+            axios({
+                method: "get",
+                url: "http://localhost:3001/classe",
+                responseType: "json",
+              }).then(function (response) {
+                setClasses(response.data)
+                console.log(response)
+              });
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     const openEditClasse = (id) => {
@@ -37,24 +37,29 @@ export default function Classe() {
         setOpenEdit(true)
     }
 
-    useEffect(() => {
-        const getClasse = async() => {
-            try {
-                axios({
-                    method: "get",
-                    url: "http://localhost:3001/classe",
-                    responseType: "json",
-                  }).then(function (response) {
-                    setClasses(response.data)
-                    console.log(response)
-                  });
-            } catch (error) {
-                console.log(alert)
-            }
-        }
+    const openDeleteClasse = (id) => {
+        setIdDelete(id)
+        setOpenDelete(true)
+    }
 
+    useEffect(() => {
         getClasse()
     }, [])
+
+    const closeModal = () => {
+        setOpen(!open)
+        getClasse()
+    }
+
+    const closeModalEdit = () => {
+        setOpenEdit(!openEdit)
+        getClasse()
+    }
+
+    const closeModalDelete = () => {
+        setOpenDelete(!openDelete)
+        getClasse()
+    }
 
     return(
         <Container>
@@ -64,8 +69,9 @@ export default function Classe() {
             <ButtonDiv>
                 <ButtonAdd onClick={() => setOpen(!open)}>Adicionar<AiOutlinePlus/></ButtonAdd>
             </ButtonDiv>
-            <ModalClasse open={open} onChangeOpen={() => setOpen(!open)} />
-            <ModalClasseUpdate  open={openEdit} onChangeOpen={() => setOpenEdit(!openEdit)} id={idEdit} />
+            <ModalClasse open={open} onChangeOpen={() => closeModal()} />
+            <ModalClasseUpdate  open={openEdit} onChangeOpen={() => closeModalEdit()} id={idEdit} />
+            <ModalClasseDelete  open={openDelete} onChangeOpen={() => closeModalDelete()} id={idDelete} />
             <Table>
                <Thead>
                     
@@ -80,7 +86,7 @@ export default function Classe() {
                             <TableItem>{item.Nome}</TableItem>
                             <TableItem>{item.Descricao}</TableItem>
                             <TAction>
-                                <ButtonAction onClick={() => deleteClasse(item.id)}>
+                                <ButtonAction onClick={() => openDeleteClasse(item.id)}>
                                     <BsFillTrashFill />
                                 </ButtonAction>
                                 <ButtonAction>

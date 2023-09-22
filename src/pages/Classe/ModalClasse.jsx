@@ -22,7 +22,6 @@ export default function ModalClasse({open, onChangeOpen}) {
                     },
                   }).then(function (response) {
                     alert('conteudo salvo com sucesso')
-                    console.log(response)
                   });
             } else {
                 alert('preencha os campos')

@@ -5,31 +5,31 @@ import { BsFillTrashFill, BsFillPencilFill } from 'react-icons/bs'
 import axios from 'axios';
 import ModalEstoque from "./ModalEstoque";
 import ModalEstoqueUpdate from "./ModalEstoqueUpdate";
+import ModalEstoqueDelete from "./ModalEstoqueDelete";
 
 
 export default function Estoque() {
 
     const [open, setOpen] = useState(false)
     const [openEdit, setOpenEdit] = useState(false)
+    const [openDelete, setOpenDelete] = useState(false)
     const [estoques, setEstoques] = useState([])
     const [idEdit, setIdEdit] = useState()
+    const [idDelete, setIdDelete] = useState()
 
-    const deleteEstoque = async (id) => {
+    const getEstoque = async() => {
         try {
-            await axios({
-                    method: "delete",
-                    url: `http://localhost:3001/estoque/${id}`,
-                    params: {
-                       id: id
-                    },
-                  }).then(function (response) {
-                    alert('conteudo deletado com sucesso')
-                    console.log(response)
-                  });
-            }
-            catch (error) {
-                console.log(error)
-            }
+            axios({
+                method: "get",
+                url: "http://localhost:3001/estoque",
+                responseType: "json",
+              }).then(function (response) {
+                setEstoques(response.data)
+                console.log(response)
+              });
+        } catch (error) {
+            console.log(alert)
+        }
     }
 
     const openEditEstoque = (id) => {
@@ -37,24 +37,29 @@ export default function Estoque() {
         setOpenEdit(true)
     }
 
-    useEffect(() => {
-        const getEstoque = async() => {
-            try {
-                axios({
-                    method: "get",
-                    url: "http://localhost:3001/estoque",
-                    responseType: "json",
-                  }).then(function (response) {
-                    setEstoques(response.data)
-                    console.log(response)
-                  });
-            } catch (error) {
-                console.log(alert)
-            }
-        }
+    const openDeleteEstoque = (id) => {
+        setIdDelete(id)
+        setOpenDelete(true)
+    }
 
+    useEffect(() => {
         getEstoque()
     }, [])
+
+    const closeModal = () => {
+        setOpen(!open)
+        getEstoque()
+    }
+
+    const closeModalEdit = () => {
+        setOpenEdit(!openEdit)
+        getEstoque()
+    }
+
+    const closeModalDelete = () => {
+        setOpenDelete(!openDelete)
+        getEstoque()
+    }
 
     return(
         <Container>
@@ -64,8 +69,9 @@ export default function Estoque() {
             <ButtonDiv>
                 <ButtonAdd onClick={() => setOpen(!open)}>Adicionar<AiOutlinePlus/></ButtonAdd>
             </ButtonDiv>
-            <ModalEstoque open={open} onChangeOpen={() => setOpen(!open)} />
-            <ModalEstoqueUpdate  open={openEdit} onChangeOpen={() => setOpenEdit(!openEdit)} id={idEdit} />
+            <ModalEstoque open={open} onChangeOpen={() =>closeModal()} />
+            <ModalEstoqueUpdate  open={openEdit} onChangeOpen={() =>closeModalEdit()} id={idEdit} />
+            <ModalEstoqueDelete  open={openDelete} onChangeOpen={() => closeModalDelete()} id={idDelete} />
             <Table>
                <Thead>
                     
@@ -84,7 +90,7 @@ export default function Estoque() {
                             <TableItem>{item.Telefone}</TableItem>
                             <TableItem>{item.Descricao}</TableItem>
                             <TAction>
-                                <ButtonAction onClick={() => deleteEstoque(item.id)}>
+                                <ButtonAction onClick={() => openDeleteEstoque(item.id)}>
                                     <BsFillTrashFill />
                                 </ButtonAction>
                                 <ButtonAction>

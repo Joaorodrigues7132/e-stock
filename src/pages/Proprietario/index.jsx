@@ -5,55 +5,60 @@ import { BsFillTrashFill, BsFillPencilFill } from 'react-icons/bs'
 import axios from 'axios';
 import ModalPropietario from "./ModalPropietario";
 import ModalPropietarioUpdate from "./ModalProprietarioUpdate";
+import ModalPropietarioDelete from "./ModalPropietarioDelete";
 
 export default function Proprietario() {
 
     const [open, setOpen] = useState(false)
     const [openEdit, setOpenEdit] = useState(false)
+    const [openDelete, setOpenDelete] = useState(false)
     const [propietarios, setPropietarios] = useState([])
     const [idEdit, setIdEdit] = useState()
-
-    const deletePropietario = async (id) => {
-        try {
-            await axios({
-                    method: "delete",
-                    url: `http://localhost:3001/propietario/${id}`,
-                    params: {
-                       id: id
-                    },
-                  }).then(function (response) {
-                    alert('conteudo deletado com sucesso')
-                    console.log(response)
-                  });
-            }
-            catch (error) {
-                console.log(error)
-            }
-    }
+    const [idDelete, setIdDelete] = useState()
 
     const openEditPropietario = (id) => {
         setIdEdit(id)
         setOpenEdit(true)
     }
 
-    useEffect(() => {
-        const getPropietario = async() => {
-            try {
-                axios({
-                    method: "get",
-                    url: "http://localhost:3001/propietario",
-                    responseType: "json",
-                  }).then(function (response) {
-                    setPropietarios(response.data)
-                    console.log(response)
-                  });
-            } catch (error) {
-                console.log(alert)
-            }
-        }
+    const openDeletePropietario = (id) => {
+        setIdDelete(id)
+        setOpenDelete(true)
+    }
 
+    const getPropietario = async() => {
+        try {
+            axios({
+                method: "get",
+                url: "http://localhost:3001/propietario",
+                responseType: "json",
+              }).then(function (response) {
+                setPropietarios(response.data)
+                console.log(response)
+              });
+        } catch (error) {
+            console.log(alert)
+        }
+    }
+
+    useEffect(() => {
         getPropietario()
     }, [])
+
+    const closeModal = () => {
+        setOpen(!open)
+        getPropietario()
+    }
+
+    const closeModalEdit = () => {
+        setOpenEdit(!openEdit)
+        getPropietario()
+    }
+
+    const closeModalDelete = () => {
+        setOpenDelete(!openDelete)
+        getPropietario()
+    }
 
 
     return(
@@ -64,8 +69,9 @@ export default function Proprietario() {
             <ButtonDiv>
                 <ButtonAdd onClick={() => setOpen(!open)}>Adicionar<AiOutlinePlus/></ButtonAdd>
             </ButtonDiv>
-            <ModalPropietario open={open} onChangeOpen={() => setOpen(!open)} />
-            <ModalPropietarioUpdate  open={openEdit} onChangeOpen={() => setOpenEdit(!openEdit)} id={idEdit} />
+            <ModalPropietario open={open} onChangeOpen={() => closeModal()} />
+            <ModalPropietarioUpdate  open={openEdit} onChangeOpen={() => closeModalEdit()} id={idEdit} />
+            <ModalPropietarioDelete  open={openDelete} onChangeOpen={() => closeModalDelete()} id={idDelete} />
             <Table>
                <Thead>
                     <TableItem>Nome</TableItem>
@@ -80,7 +86,7 @@ export default function Proprietario() {
                             <TableItem>{item.Contato}</TableItem>
                             <TableItem>{item.Descricao}</TableItem>
                             <TAction>
-                                <ButtonAction onClick={() => deletePropietario(item.id)}>
+                                <ButtonAction onClick={() => openDeletePropietario(item.id)}>
                                     <BsFillTrashFill />
                                 </ButtonAction>
                                 <ButtonAction>

@@ -83,16 +83,16 @@ export default function ModalPropietarioUpdate({open, onChangeOpen, id}) {
                         </Field>
         
                         <Field>
-                                <p>Contato:</p>
-                                    <InputMask
-                                        mask="(99)9999-9999"
-                                        value={contato}
-                                        onChange={(e) => setContato(e.target.value)}
-                                    >
-                                        {(inputProps) => <Input {...inputProps} type="tel" placeholder="" />}
-                                    </InputMask>
-
-                                </Field>
+                            <p>Contato:</p>
+                            <InputMask
+                                mask="(99)9999-9999"
+                                value={contato}
+                                onChange={(e) => setContato(e.target.value)}
+                                id="contato"
+                            >
+                                {(inputProps) => <Input {...inputProps} type="tel" placeholder="" />}
+                            </InputMask>
+                        </Field>
         
                         <Field>
                             <p>Descrição:</p>

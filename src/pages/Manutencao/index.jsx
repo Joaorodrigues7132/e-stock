@@ -5,56 +5,60 @@ import { BsFillTrashFill, BsFillPencilFill } from 'react-icons/bs'
 import axios from 'axios';
 import ModalManutencao from "./ModalManutencao";
 import ModalManutencaoUpdate from "./ModalManutencaoUpdate";
+import ModalManutencaoDelete from "./ModalManutencaoDelete";
 
 export default function Manutencao() {
 
     const [open, setOpen] = useState(false)
     const [openEdit, setOpenEdit] = useState(false)
+    const [openDelete, setOpenDelete] = useState(false)
     const [manutencoes, setManutencoes] = useState([])
     const [idEdit, setIdEdit] = useState()
-
-
-    const deleteManutencao = async (id) => {
-        try {
-            await axios({
-                    method: "delete",
-                    url: `http://localhost:3001/manutencao/${id}`,
-                    params: {
-                       id: id
-                    },
-                  }).then(function (response) {
-                    alert('conteudo deletado com sucesso')
-                    console.log(response)
-                  });
-            }
-            catch (error) {
-                console.log(error)
-            }
-    }
+    const [idDelete, setIdDelete] = useState()
 
     const openEditManutencao = (id) => {
         setIdEdit(id)
         setOpenEdit(true)
     }
 
-    useEffect(() => {
-        const getManutencao = async() => {
-            try {
-                axios({
-                    method: "get",
-                    url: "http://localhost:3001/manutencao",
-                    responseType: "json",
-                  }).then(function (response) {
-                    setManutencoes(response.data)
-                    console.log(response)
-                  });
-            } catch (error) {
-                console.log(alert)
-            }
-        }
+    const openDeleteManutencao = (id) => {
+        setIdDelete(id)
+        setOpenDelete(true)
+    }
 
+    const getManutencao = async() => {
+        try {
+            axios({
+                method: "get",
+                url: "http://localhost:3001/manutencao",
+                responseType: "json",
+              }).then(function (response) {
+                setManutencoes(response.data)
+                console.log(response)
+              });
+        } catch (error) {
+            console.log(alert)
+        }
+    }
+
+    useEffect(() => {
         getManutencao()
     }, [])
+
+    const closeModal = () => {
+        setOpen(!open)
+        getManutencao()
+    }
+
+    const closeModalEdit = () => {
+        setOpenEdit(!openEdit)
+        getManutencao()
+    }
+
+    const closeModalDelete = () => {
+        setOpenDelete(!openDelete)
+        getManutencao()
+    }
 
 
     return(
@@ -65,8 +69,9 @@ export default function Manutencao() {
             <ButtonDiv>
                 <ButtonAdd onClick={() => setOpen(!open)}>Adicionar<AiOutlinePlus/></ButtonAdd>
             </ButtonDiv>
-            <ModalManutencao open={open} onChangeOpen={() => setOpen(!open)} />
-            <ModalManutencaoUpdate  open={openEdit} onChangeOpen={() => setOpenEdit(!openEdit)} id={idEdit} />
+            <ModalManutencao open={open} onChangeOpen={() =>closeModal()} />
+            <ModalManutencaoUpdate  open={openEdit} onChangeOpen={() => closeModalEdit()} id={idEdit} />
+            <ModalManutencaoDelete  open={openDelete} onChangeOpen={() => closeModalDelete()} id={idDelete} />
             <Table>
                <Thead>
                     <TableItem>Data Envio</TableItem>
@@ -87,7 +92,7 @@ export default function Manutencao() {
                             <TableItem>{item.prestador?.Nome}</TableItem>
                             <TableItem>{item.ativo?.Descricao}</TableItem>
                             <TAction>
-                                <ButtonAction onClick={() => deleteManutencao(item.id)}>
+                                <ButtonAction onClick={() => openDeleteManutencao(item.id)}>
                                     <BsFillTrashFill />
                                 </ButtonAction>
                                 <ButtonAction>

@@ -65,7 +65,7 @@ export default function ModalEstoque({ open, onChangeOpen }) {
                                         value={telefone}
                                         onChange={(e) => setTelefone(e.target.value)}
                                     >
-                                        {(inputProps) => <Input {...inputProps} type="tel" placeholder="" />}
+                                        {(inputProps) => <Input {...inputProps} type="tel" placeholder="(99)9999-9999" />}
                                     </InputMask>
 
                                 </Field>
