@@ -1,7 +1,7 @@
 import { BackModal, Modal, Field, Input, Select, ModalFields, ModalHeader, Button } from "./modalStyles";
 
 import { AiOutlineClose } from 'react-icons/ai'
-
+import InputMask from "react-input-mask";
 import axios from 'axios';
 import {useEffect, useState } from "react";
 
@@ -41,16 +41,14 @@ export default function ModalPrestadorUpdate({open, onChangeOpen, id}) {
         conteudoElemento.pop()
         const conteudoElementoFiltrado = conteudoElemento.map(e => e + "</option>")
         const dadoDaRequisicao = conteudoElementoFiltrado.find(e => e === `<option value="${idRequest}">${nome}</option>`)
-        if(dadoDaRequisicao) {
+        arr.push(`<option value="${idRequest}">${nome}</option>`)
             for(let i = 1; i <= conteudoElementoFiltrado.length; i++) {
-                if (conteudoElementoFiltrado[i] = `<option value="${idRequest}">${nome}</option>`) {
+                if (conteudoElementoFiltrado[i] == dadoDaRequisicao) {
                     i++;
                 }
                 arr.push(conteudoElementoFiltrado[i])
             }
             arr.pop()
-            arr.push(`<option value="${idRequest}">${nome}</option>`)
-       }
        elemento.innerHTML = ""
        arr.map(e => {
         return elemento.innerHTML += e
@@ -134,23 +132,30 @@ export default function ModalPrestadorUpdate({open, onChangeOpen, id}) {
         
                         <Field>
                             <p> Telefone:</p>
-                            <Input id="telefone"  value={telefone} onChange={(e) => setTelefone(e.target.value)} />
+                            <InputMask
+                                mask="(99)9999-9999"
+                                value={telefone}
+                                onChange={(e) => setTelefone(e.target.value)}
+                                id="telefone"
+                            >
+                                {(inputProps) => <Input {...inputProps} type="tel" placeholder="(99)9999-9999" />}
+                            </InputMask>
                         </Field>
         
                         <Field>
-                            <p>Endereco:</p>
+                            <p>Endereço:</p>
                             <Input id="endereco"  value={endereco} onChange={(e) => setEndereco(e.target.value)} />
                         </Field>
         
                         <Field>
-                            <p>Descricao:</p>
+                            <p>Descrição:</p>
                             <Input id="desc"  value={descricao} onChange={(e) => setDescricao(e.target.value)} />
                         </Field>
 
                         <Field>
-                            <p>Proprietario:</p>
+                            <p>Proprietário:</p>
                             <Select id="propietario">
-                                <option>Selecione um Propietario</option>
+                                <option>Selecione um Propietário</option>
                                 {propietarios.map((e) => {
                                     return <option value={e.id}>{e.Nome}</option>
                                 })}

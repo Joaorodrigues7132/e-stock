@@ -2,6 +2,7 @@ import { BackModal, Modal, Field, Input, Select, ModalFields, ModalHeader, Butto
 import axios from 'axios';
 import { AiOutlineClose } from 'react-icons/ai'
 import { useState } from "react";
+import InputMask from "react-input-mask";
 
 export default function ModalPropietario({open, onChangeOpen}) {
 
@@ -48,11 +49,17 @@ export default function ModalPropietario({open, onChangeOpen}) {
         
                         <Field>
                             <p>Contato:</p>
-                            <Input value={contato} onChange={(e) => setContato(e.target.value)} />
+                            <InputMask
+                                mask="(99)9999-9999"
+                                value={contato}
+                                onChange={(e) => setContato(e.target.value)}
+                            >
+                                {(inputProps) => <Input {...inputProps} type="tel" placeholder="(99)9999-9999" />}
+                            </InputMask>
                         </Field>
         
                         <Field>
-                            <p>Descricao:</p>
+                            <p>Descrição:</p>
                             <Input value={descricao} onChange={(e) => setDescricao(e.target.value)} />
                         </Field>
 

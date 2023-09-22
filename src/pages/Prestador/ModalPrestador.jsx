@@ -3,6 +3,7 @@ import { BackModal, Modal, Field, Input, Select, ModalFields, ModalHeader, Butto
 import { AiOutlineClose } from 'react-icons/ai'
 import { useEffect, useState } from "react";
 import axios from 'axios';
+import InputMask from "react-input-mask";
 
 export default function ModalPrestador({open, onChangeOpen}) {
 
@@ -77,23 +78,30 @@ export default function ModalPrestador({open, onChangeOpen}) {
         
                         <Field>
                             <p> Telefone:</p>
-                            <Input id="telefone"  value={telefone} onChange={(e) => setTelefone(e.target.value)} />
+                            <InputMask
+                                mask="(99)9999-9999"
+                                value={telefone}
+                                onChange={(e) => setTelefone(e.target.value)}
+                                id="telefone"
+                            >
+                                {(inputProps) => <Input {...inputProps} type="tel" placeholder="(99)9999-9999" />}
+                            </InputMask>
                         </Field>
         
                         <Field>
-                            <p>Endereco:</p>
+                            <p>Endereço:</p>
                             <Input id="endereco"  value={endereco} onChange={(e) => setEndereco(e.target.value)} />
                         </Field>
         
                         <Field>
-                            <p>Descricao:</p>
+                            <p>Descrição:</p>
                             <Input id="desc"  value={descricao} onChange={(e) => setDescricao(e.target.value)} />
                         </Field>
 
                         <Field>
-                            <p>Proprietario:</p>
+                            <p>Proprietário:</p>
                             <Select id="propietario">
-                                <option>Selecione um Propietario</option>
+                                <option>Selecione um Propietário</option>
                                 {propietarios.map((e) => {
                                     return <option value={e.id}>{e.Nome}</option>
                                 })}

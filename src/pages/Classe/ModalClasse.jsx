@@ -22,7 +22,6 @@ export default function ModalClasse({open, onChangeOpen}) {
                     },
                   }).then(function (response) {
                     alert('conteudo salvo com sucesso')
-                    console.log(response)
                   });
             } else {
                 alert('preencha os campos')
@@ -47,7 +46,7 @@ export default function ModalClasse({open, onChangeOpen}) {
                         </Field>
         
                         <Field>
-                            <p>Descricao:</p>
+                            <p>Descrição:</p>
                             <Input value={descricao} onChange={(e) => setDescricao(e.target.value)} />
                         </Field>
 

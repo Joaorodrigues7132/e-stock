@@ -8,9 +8,10 @@ export default function Header() {
 
     const showSideBar = () => setSideBar(!sideBar)
 
+
     return(
         <Container>
-            <HiMenuAlt2 onClick={showSideBar} />
+            <HiMenuAlt2 onClick={showSideBar}/>
             <Logo />
             {sideBar && <Sidebar active={setSideBar} />}
         </Container>

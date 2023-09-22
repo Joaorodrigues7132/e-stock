@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import Header from './components/header';
@@ -11,7 +12,7 @@ import Proprietario from './pages/Proprietario';
 function App() {
   return (
     <div className='App'>
-    <Header />
+    <Header className="menu" />
     <Routes>
       <Route path='/' element={<Estoque />}/>
       <Route path='/proprietario' element={<Proprietario />} />

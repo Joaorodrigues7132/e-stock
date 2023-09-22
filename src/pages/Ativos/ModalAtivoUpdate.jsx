@@ -69,6 +69,7 @@ export default function ModalAtivoUpdate({open, onChangeOpen, id}) {
         getPropietario()
     }, [])
 
+
     const fillSelect = (id, nome, idRequest) => {
         const arr = []
         const elemento = document.getElementById(`${id}`)
@@ -76,16 +77,14 @@ export default function ModalAtivoUpdate({open, onChangeOpen, id}) {
         conteudoElemento.pop()
         const conteudoElementoFiltrado = conteudoElemento.map(e => e + "</option>")
         const dadoDaRequisicao = conteudoElementoFiltrado.find(e => e === `<option value="${idRequest}">${nome}</option>`)
-        if(dadoDaRequisicao) {
-            arr.push(`<option value="${idRequest}">${nome}</option>`)
-            for(let i = 0; i <= conteudoElementoFiltrado.length; i++) {
-                if (conteudoElementoFiltrado[i] = `<option value="${idRequest}">${nome}</option>`) {
+        arr.push(`<option value="${idRequest}">${nome}</option>`)
+            for(let i = 1; i <= conteudoElementoFiltrado.length; i++) {
+                if (conteudoElementoFiltrado[i] == dadoDaRequisicao) {
                     i++;
                 }
                 arr.push(conteudoElementoFiltrado[i])
             }
             arr.pop()
-       }
        elemento.innerHTML = ""
        arr.map(e => {
         return elemento.innerHTML += e
@@ -178,7 +177,7 @@ export default function ModalAtivoUpdate({open, onChangeOpen, id}) {
                         </Field>
         
                         <Field>
-                            <p>Descricao:</p>
+                            <p>Descrição:</p>
                             <Input id="desc" value={descricao} onChange={(e) => setDescricao(e.target.value)} />
                         </Field>
         
@@ -193,9 +192,9 @@ export default function ModalAtivoUpdate({open, onChangeOpen, id}) {
                         </Field>
         
                         <Field>
-                            <p>Proprietario:</p>
+                            <p>Proprietário:</p>
                             <Select id="propietario">
-                                <option>Selecione um Propietario</option>
+                                <option>Selecione um Propietário</option>
                                 {propietarios.map((e) => {
                                     return <option value={e.id}>{e.Nome}</option>
                                 })}
