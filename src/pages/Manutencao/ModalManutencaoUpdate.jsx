@@ -153,6 +153,7 @@ export default function ModalManutencaoUpdate({open, onChangeOpen, id}) {
                     <Field>
                                     <p>Data Envio:</p>
                                     <InputMask
+                                    id="dataEnvio"
                                         mask="99/99/9999"
                                         value={dataEnvio}
                                         onChange={(e) => setDataEnvio(e.target.value)}
