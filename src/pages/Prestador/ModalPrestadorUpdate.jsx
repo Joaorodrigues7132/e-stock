@@ -106,6 +106,7 @@ export default function ModalPrestadorUpdate({open, onChangeOpen, id}) {
                     },
                   }).then(function (response) {
                     alert('conteudo editado com sucesso')
+                    onChangeOpen(!open)
                     console.log(response)
                   });
             } else {

@@ -92,6 +92,12 @@ export default function ModalAtivo({open, onChangeOpen}) {
                   }).then(function (response) {
                     alert('conteudo salvo com sucesso')
                     console.log(response)
+
+                    setMarca('')
+                     setDescricao('')
+                     setModelo('')
+
+                    onChangeOpen(!open)
                   });
             } else {
                 alert('preencha os campos')

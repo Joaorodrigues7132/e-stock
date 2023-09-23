@@ -28,6 +28,15 @@ export default function ModalEstoque({ open, onChangeOpen }) {
                     },
                 }).then(function (response) {
                     alert('conteudo salvo com sucesso')
+
+
+                    setEndereco('')
+                     setNome('')
+                     setTelefone('')
+                     setDescricao('')
+
+
+                    onChangeOpen(!open)
                     console.log(response)
                 });
             } else {

@@ -16,6 +16,7 @@ export default function ModalPropietarioDelete({open, onChangeOpen, id}) {
                     },
                   }).then(function () {
                     alert('conteudo deletado com sucesso')
+                    onChangeOpen(!open)
                   });
             }
             catch (error) {

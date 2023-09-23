@@ -50,6 +50,14 @@ export default function ModalPrestador({open, onChangeOpen}) {
                     },
                   }).then(function (response) {
                     alert('conteudo salvo com sucesso')
+
+
+                    setDescricao('')
+                 setNome('')
+                     setTelefone('')
+                     setEndereco('')
+
+                    onChangeOpen(!open)
                     console.log(response)
                   });
             } else {

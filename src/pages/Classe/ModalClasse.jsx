@@ -22,6 +22,11 @@ export default function ModalClasse({open, onChangeOpen}) {
                     },
                   }).then(function (response) {
                     alert('conteudo salvo com sucesso')
+
+                  setNome('')
+                     setDescricao('')
+
+                    onChangeOpen(!open)
                   });
             } else {
                 alert('preencha os campos')

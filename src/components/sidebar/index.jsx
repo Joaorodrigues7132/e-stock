@@ -30,22 +30,22 @@ export default function Sidebar({ active }){
     <Container sidebar={active}>
       <AiOutlineClose onClick={closeSidebar} />  
       <Content>
-        <NavLink to={'/'} style={{textDecoration: 'none'}}>
+        <NavLink to={'/'} onClick={closeSidebar} style={{textDecoration: 'none'}}>
             <SidebarItem Icon={BsFillBoxFill} Text="Estoque" />
         </NavLink>
-        <NavLink to={'/proprietario'} style={{textDecoration: 'none'}}>
+        <NavLink to={'/proprietario'} onClick={closeSidebar} style={{textDecoration: 'none'}}>
             <SidebarItem Icon={BsFillPersonFill} Text="Proprietário" />
         </NavLink>
-        <NavLink to={'/manutencao'} style={{textDecoration: 'none'}}>
+        <NavLink to={'/manutencao'} onClick={closeSidebar} style={{textDecoration: 'none'}}>
           <SidebarItem Icon={BsScrewdriver} Text="Manutenção" />
         </NavLink>
-        <NavLink to={'/prestador'} style={{textDecoration: 'none'}}>
+        <NavLink to={'/prestador'} onClick={closeSidebar} style={{textDecoration: 'none'}}>
           <SidebarItem Icon={BsFillWalletFill} Text="Prestador de Serviço" />
         </NavLink>
-        <NavLink to={'/ativos'} style={{textDecoration: 'none'}}>
+        <NavLink to={'/ativos'} onClick={closeSidebar} style={{textDecoration: 'none'}}>
             <SidebarItem Icon={BsClipboard2CheckFill} Text="Ativos" />
         </NavLink>
-        <NavLink to={'/classe'} style={{textDecoration: 'none'}}>
+        <NavLink to={'/classe'} onClick={closeSidebar} style={{textDecoration: 'none'}}>
             <SidebarItem Icon={AiOutlineCloudServer} Text="Classe" />
         </NavLink>
       </Content>

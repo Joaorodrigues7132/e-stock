@@ -74,10 +74,12 @@ export default function ModalManutencaoUpdate({open, onChangeOpen, id}) {
     }
 
     const fillInputs = (response) => {
+        console.log(response)
         fillSelect('ativo', response?.ativo?.Descricao, response?.ativoId)
         fillSelect('prestador', response?.prestador?.Nome, response?.prestadorId)
 
         const DataEnvio = document.getElementById("dataEnvio")
+    
         DataEnvio.value = response?.DataEnvio
         setDataEnvio(response?.DataEnvio)
 
@@ -102,8 +104,9 @@ export default function ModalManutencaoUpdate({open, onChangeOpen, id}) {
                 url: `http://localhost:3001/manutencao/${id}`,
                 responseType: "json",
               }).then(function (response) {
-                fillInputs(response.data)
                 console.log(response.data[0])
+                fillInputs(response.data)
+                
               });
         } catch (error) {
             console.log(alert)
@@ -127,6 +130,7 @@ export default function ModalManutencaoUpdate({open, onChangeOpen, id}) {
                     },
                   }).then(function (response) {
                     alert('conteudo editado com sucesso')
+                    onChangeOpen(!open)
                     console.log(response)
                   });
             } else {

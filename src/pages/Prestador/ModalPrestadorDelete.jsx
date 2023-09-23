@@ -16,6 +16,7 @@ export default function ModalPrestadorDelete({open, onChangeOpen, id}) {
                     },
                   }).then(function () {
                     alert('conteudo deletado com sucesso')
+                    onChangeOpen(!open)
                   });
             }
             catch (error) {

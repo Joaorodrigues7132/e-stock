@@ -24,6 +24,13 @@ export default function ModalPropietario({open, onChangeOpen}) {
                   }).then(function (response) {
                     alert('conteudo salvo com sucesso')
                     console.log(response)
+
+
+                     setContato('')
+                     setNome('')
+                     setDescricao('')
+
+                    onChangeOpen(!open)
                   });
             } else {
                 alert('preencha os campos')
