@@ -19,6 +19,9 @@ export const Thead = styled.div`
     display: flex;
     justify-content: space-around;
     align-items: center;
+    background-color: #998543;
+    color: white;
+    font-weight:600
 `
 
 export const TableItem = styled.div`
@@ -62,6 +65,10 @@ export const ButtonAdd = styled.button`
     justify-content: space-around;
     cursor: pointer;
     font-size: 20px;
+    background-color: #998543;
+    color: white;
+    border-radius: 7px;
+
 `
 
 export const ButtonDiv = styled.div`
