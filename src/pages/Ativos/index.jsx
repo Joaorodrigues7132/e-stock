@@ -6,6 +6,7 @@ import { BsFillTrashFill, BsFillPencilFill } from 'react-icons/bs'
 import ModalAtivoUpdate from "./ModalAtivoUpdate";
 import axios from 'axios';
 import ModalAtivoDelete from "./ModalAtivoDelete";
+import { Field, Input } from "./modalStyles";
 
 export default function Ativos() {
 
@@ -15,6 +16,7 @@ export default function Ativos() {
     const [ativos, setAtivos] = useState([])
     const [idEdit, setIdEdit] = useState()
     const [idDelete, setIdDelete] = useState()
+    const [search,setSearch] = useState('')
 
     const getAtivo = async() => {
         try {
@@ -67,7 +69,17 @@ export default function Ativos() {
             <TitleTable>
                 <h1>Ativos</h1>
             </TitleTable>
-            <ButtonDiv>
+            <ButtonDiv >
+       
+
+                      
+                        <div style={{display:'flex', alignItems:'center', width:'100%'}}>
+                        <Field style={{width: '300px'}}>
+                            <p>Pesquisa:</p>
+                            <Input   value={search} onChange={(e) => setSearch(e.target.value)} />
+                        </Field>
+                        </div>
+                        
                 <ButtonAdd onClick={() => setOpen(!open)}>Adicionar<AiOutlinePlus/></ButtonAdd>
             </ButtonDiv>
             <ModalAtivo open={open} onChangeOpen={() => closeModal()} />
@@ -84,7 +96,16 @@ export default function Ativos() {
                     <TableItem>Ações</TableItem>
                </Thead>
                <Tbody>
-                   {ativos.map(item => (
+                   {ativos.filter((item) => {
+ 
+   const propriedadesEmLowercase = Object.values(item)
+   .map(value => value && value.Nome ? value.Nome.toLowerCase() : value.toString().toLowerCase());
+
+ const termoEmLowercase = search.toLowerCase();
+
+
+ return propriedadesEmLowercase.some(propriedade => propriedade.includes(termoEmLowercase));
+}).map(item => (
                         <>
                             <TableItem>{item.Marca}</TableItem>
                             <TableItem>{item.estoque?.Nome}</TableItem>

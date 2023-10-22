@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+
+
 export const Container = styled.div`
     display: block;
     margin: 0 auto;
@@ -29,6 +31,7 @@ export const TableItem = styled.div`
     align-items: center;
     border: 1px solid black;
     padding: 10px;
+    font-family: 'Roboto', sans-serif;
 `
 
 export const Tbody = styled.div`
@@ -36,6 +39,7 @@ export const Tbody = styled.div`
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
+  
 `
 
 export const TAction = styled.div`
