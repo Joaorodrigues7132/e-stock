@@ -40,7 +40,7 @@ export default function Sidebar({ active }){
           <SidebarItem Icon={BsScrewdriver} Text="Manutenção" />
         </NavLink>
         <NavLink to={'/prestador'} onClick={closeSidebar} style={{textDecoration: 'none'}}>
-          <SidebarItem Icon={BsFillWalletFill} Text="Prestador de Serviço" />
+          <SidebarItem Icon={BsFillWalletFill} Text="Prestadores de Serviços" />
         </NavLink>
         <NavLink to={'/ativos'} onClick={closeSidebar} style={{textDecoration: 'none'}}>
             <SidebarItem Icon={BsClipboard2CheckFill} Text="Ativos" />

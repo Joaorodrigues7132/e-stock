@@ -1,4 +1,4 @@
-import { Container, Logo } from "./styles";
+import { Container, ContainerIcon, Logo } from "./styles";
 import {HiMenuAlt2} from 'react-icons/hi'
 import { useState } from "react";
 import Sidebar from "../sidebar";
@@ -11,7 +11,7 @@ export default function Header() {
 
     return(
         <Container>
-            <HiMenuAlt2 onClick={showSideBar}/>
+            <ContainerIcon><HiMenuAlt2 onClick={showSideBar}/></ContainerIcon>
             <Logo />
             {sideBar && <Sidebar active={setSideBar} />}
         </Container>

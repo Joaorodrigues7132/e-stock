@@ -9,17 +9,7 @@ export const Container = styled.div`
     margin-bottom: 5%;
     justify-content: center;
     align-items: center;
-    > svg {
-        position: fixed;
-        color: white;
-        width: 30px;
-        height: 30px;
-        margin-top: 32px;
-        margin-left: 32px;
-        cursor: pointer;
-        top: 0;
-        left: 0;
-    }
+    
 `
 
 export const Logo = styled.div`
@@ -29,4 +19,20 @@ export const Logo = styled.div`
     background-repeat: no-repeat;
     width: 250px;
     height: 250px;
+`
+export const ContainerIcon = styled.div`
+width: 30px;
+    height: 30px;
+    margin-top: 32px;
+    margin-left: 32px;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    color: white;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+
 `

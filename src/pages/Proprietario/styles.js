@@ -31,7 +31,7 @@ export const TableItem = styled.div`
     align-items: center;
     border: 1px solid black;
     padding: 10px;
-    font-family: 'Roboto', sans-serif;
+
 `
 
 export const Tbody = styled.div`

@@ -64,7 +64,7 @@ export default function Prestador() {
     return(
         <Container>
             <TitleTable>
-            <h1>Prestador</h1>
+            <h1>Prestadores de Serviços </h1>
             </TitleTable>
             <ButtonDiv>
                 <ButtonAdd onClick={() => setOpen(!open)}>Adicionar<AiOutlinePlus/></ButtonAdd>
