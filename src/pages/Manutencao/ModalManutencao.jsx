@@ -156,7 +156,7 @@ export default function ModalManutencao({ open, onChangeOpen }) {
                                 </Field>
 
 
-                                <Button spaced="15px" fill="rgba(33, 217, 82, 0.8)" size="100%" onClick={() => saveManutencao()}>Salvar</Button>
+                                <Button spaced="15px" fill="#998543" size="100%" onClick={() => saveManutencao()}>Salvar</Button>
                             </ModalFields>
                         </Modal>
                     </BackModal>

@@ -83,7 +83,7 @@ export default function ModalEstoque({ open, onChangeOpen }) {
                                     <p>Descrição:</p>
                                     <Input value={descricao} onChange={(e) => setDescricao(e.target.value)} />
                                 </Field>
-                                <Button spaced="15px" fill="rgba(33, 217, 82, 0.8)" size="100%" onClick={() => saveEstoque()}>Salvar</Button>
+                                <Button spaced="15px"fill="#998543"size="100%" onClick={() => saveEstoque()}>Salvar</Button>
                             </ModalFields>
                         </Modal>
                     </BackModal>

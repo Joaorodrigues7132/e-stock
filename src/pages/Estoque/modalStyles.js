@@ -29,6 +29,8 @@ export const Button = styled.button`
     background: none;
     background-color: ${props => props.fill || "none"};
     margin-top: ${props => props.spaced || "0px"};
+    color:white;
+    color:white;
     cursor: pointer;
 `
 

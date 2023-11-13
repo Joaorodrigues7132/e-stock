@@ -71,7 +71,7 @@ export default function ModalPropietario({open, onChangeOpen}) {
                             <Input value={descricao} onChange={(e) => setDescricao(e.target.value)} />
                         </Field>
 
-                        <Button spaced="15px" fill="rgba(33, 217, 82, 0.8)" size="100%" onClick={() =>savePropietario()}>Salvar</Button>
+                        <Button spaced="15px"fill="#998543" size="100%" onClick={() =>savePropietario()}>Salvar</Button>
                     </ModalFields>
                 </Modal>   
             </BackModal> 

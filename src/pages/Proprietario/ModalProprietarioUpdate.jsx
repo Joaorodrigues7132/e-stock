@@ -99,8 +99,8 @@ export default function ModalPropietarioUpdate({open, onChangeOpen, id}) {
                             <p>Descrição:</p>
                             <Input id="desc"   onChange={(e) => setDescricao(e.target.value)} />
                         </Field>        
-                        <Button spaced="15px" fill="rgba(33, 217, 82, 0.8)" size="100%" onClick={() => updatePropietario(id)}>Editar</Button>
-                        <Button spaced="15px" fill="rgba(33, 217, 82, 0.8)" size="100%" onClick={() => getPropietario(id)}>Pegar dados atuais</Button>
+                        <Button spaced="15px" fill="#998543" size="100%" onClick={() => updatePropietario(id)}>Editar</Button>
+                        <Button spaced="15px"fill="#998543" size="100%" onClick={() => getPropietario(id)}>Pegar dados atuais</Button>
                     </ModalFields>
                 </Modal>   
             </BackModal> 

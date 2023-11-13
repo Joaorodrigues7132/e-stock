@@ -117,7 +117,7 @@ export default function ModalPrestador({open, onChangeOpen}) {
                         </Field>
 
 
-                        <Button spaced="15px" fill="rgba(33, 217, 82, 0.8)" size="100%" onClick={() =>savePrestador()}>Salvar</Button>
+                        <Button spaced="15px" fill="#998543" size="100%" onClick={() =>savePrestador()}>Salvar</Button>
                     </ModalFields>
                 </Modal>   
             </BackModal> 

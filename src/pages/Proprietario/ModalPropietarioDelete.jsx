@@ -35,7 +35,7 @@ export default function ModalPropietarioDelete({open, onChangeOpen, id}) {
                         <Field>
                             <p>Deseja realmente deletar esse dado ?</p>
                         </Field>        
-                        <Button spaced="15px" fill="rgba(33, 217, 82, 0.8)" size="100%" onClick={() => deletePropietario(id)}>Deletar</Button>
+                        <Button spaced="15px" fill="#998543" size="100%" onClick={() => deletePropietario(id)}>Deletar</Button>
                     </ModalFields>
                 </Modal>   
             </BackModal> 

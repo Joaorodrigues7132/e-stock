@@ -163,8 +163,8 @@ export default function ModalPrestadorUpdate({open, onChangeOpen, id}) {
                             </Select>
                         </Field>
 
-                        <Button spaced="15px" fill="rgba(33, 217, 82, 0.8)" size="100%" onClick={() => updatePrestador(id)}>Editar</Button>
-                        <Button spaced="15px" fill="rgba(33, 217, 82, 0.8)" size="100%" onClick={() => getPrestador(id)}>Pegar dados atuais</Button>
+                        <Button spaced="15px" fill="#998543" size="100%" onClick={() => updatePrestador(id)}>Editar</Button>
+                        <Button spaced="15px" fill="#998543" size="100%" onClick={() => getPrestador(id)}>Pegar dados atuais</Button>
                     </ModalFields>
                 </Modal>   
             </BackModal> 
